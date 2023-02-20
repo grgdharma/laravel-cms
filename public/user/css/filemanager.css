@@ -1,0 +1,149 @@
+#filemanager .upload-img-items {
+  border: 1px solid #efefef;
+    padding: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+#filemanager .upload-img-items label{
+  white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #000;
+}
+
+#filemanager .thumbnail{
+	height: 120px;
+	margin-bottom: 0px !important;
+}
+#filemanager .thumbnail img{
+	height: 90px;
+	max-width: 100%;
+}
+#filemanager .list-group .thumbnail {
+	height: 125px !important;
+}
+#filemanager .modal-content{
+	border-radius: 0px;
+    border: 0px;
+}
+#filemanager .modal-body {
+    background: #fff;
+}
+#filemanager .modal-header{
+	padding: 5px 5px 0px 25px !important;
+    display: inline-block !important;
+    width: 100% !important;
+}
+#input-image {
+	margin-top: 15px;
+}
+#input-image img{
+	width: 145px;
+}
+#filemanager .modal-header button {
+	float: right;
+	margin: 0;
+	margin: 0;
+	border-radius: 0;
+	border-right: 0;
+	border-bottom: 0;
+}
+#filemanager .modal-title {
+	font-size: 18px !important;
+}
+.class-custom-file{
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+}
+.class-custom-file:focus{
+    border: 1px solid #dee2e6;
+}
+.file-wrapper{
+    text-align: center;
+    display: grid; 
+}
+.img-thumbnail {
+	text-decoration: none !important;
+    border-radius: 0;
+    padding: 5px 10px;
+}
+.display-input-image img {
+	width: 100%;
+}
+
+.display-input-image {
+    overflow: hidden;
+    border-radius: 6px;
+    max-height: 100px;
+    margin: 15px 0;
+    display: inline-block;
+    width: 100%;
+}
+.display-input-image img{
+    width: 100%;
+}
+
+.popover .btn, #filemanager .btn {
+    box-shadow: none;
+    padding: 5px 10px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 500;
+    border-width: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-radius: 0px;
+}
+/*
+ *  STYLE 1
+ */
+
+#style-1::-webkit-scrollbar-track
+{
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+  width: 10px;
+  height: 5px;
+  background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+  border-radius: 0px;
+  background-color: #555;
+}
+
+#dynamic_form {
+    width:100%;
+}
+
+/*pagination*/
+/*pagination*/
+.custom-pagination {
+    margin: 0;
+}
+.custom-pagination {
+    display: inline-block;
+    width: 100%;
+}
+.custom-pagination a{
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+.custom-pagination a.active-page {
+    background: #0f8c82;
+    color: #fff;
+    border-color: #0f8c82;
+}
+.order-update-form {
+    background: #0e9187;
+    color: #fff;
+}

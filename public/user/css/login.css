@@ -1,0 +1,111 @@
+/*Login Reg form*/
+.login-reg-form-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+#reg-login-form, #reset-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    padding: 15px;
+    border-radius: 5px;
+}
+.form-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.invalid-feedback {
+   
+    font-size: 70% !important;
+    color: #dc3545;
+}
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+    text-align: right;
+}
+
+.login-main-text h2{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.login-reg-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #990a0f;
+    text-transform: uppercase;
+}
+.login-reg-sub-title {
+    color: #4ba049;
+    font-weight: bold;
+}
+.btn-black{
+    background-color: #343a40 !important;
+    color: #fff;
+}
+.logo-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #990a0f;
+    text-transform: uppercase;
+}
+.logo-sub-title {
+    color: #4ba049;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.card-title{
+    text-align: center;
+    font-weight: 500;
+}
+form .btn.btn-default {
+    background: #e6ad3c;
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+    border: 0;
+}
+form .btn.btn-default:focus{
+    box-shadow: none;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.btn-facebook{
+    background: blue !important;
+    color: white !important;
+}
+.btn-google{
+    background: red !important;
+    color: white !important;
+}
+
+
+
+@media screen and (max-width: 450px) {
+    #reg-login-form, #reset-form {
+        width: 90%;
+    }
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    #reg-login-form, #reset-form {
+        width: 90%;
+    }
+    .register-form{
+        margin-top: 60%;
+    }
+}

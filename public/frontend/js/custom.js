@@ -1,0 +1,23 @@
+"use strict";
+
+jQuery(function ($) {
+  // heroBanner carousel
+  function heroCarousel() {
+    $('.carousel_hero').slick({
+      dots: true,
+      arrows: false,
+      infinite: true,
+      speed: 600,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      pauseOnHover: true,
+      prevArrow: '<button class="slide-arrow prev-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="6.667" height="11.083" viewBox="0 0 6.667 11.083"><defs><style>.arrow-iconPrev{fill:#2a488e;}</style></defs><path class="arrow-iconPrev" d="M4.655,5.542.244,9.732a.764.764,0,0,0,0,1.12.865.865,0,0,0,1.179,0l5-4.75a.764.764,0,0,0,0-1.12l-5-4.75a.865.865,0,0,0-1.179,0,.764.764,0,0,0,0,1.12Z" transform="translate(6.667 11.083) rotate(-180)"></path></svg></button>',
+      nextArrow: '<button class="slide-arrow next-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="6.667" height="11.083" viewBox="0 0 6.667 11.083"><defs><style>.arrow-iconNext{fill:#2a488e;}</style></defs><path class="arrow-iconNext" d="M-4.655,5.542l4.411,4.19a.764.764,0,0,1,0,1.12.865.865,0,0,1-1.179,0l-5-4.75a.764.764,0,0,1,0-1.12l5-4.75a.865.865,0,0,1,1.179,0,.764.764,0,0,1,0,1.12Z" transform="translate(0 11.083) rotate(-180)"></path></svg></button>'
+    });
+  } //
+
+
+  heroCarousel();
+});
