@@ -17,7 +17,7 @@ class SystemPermissionController extends Controller
     {
         if(checkAuthorization() == true){
             $data_collection['role'] = AdminRole::where('id','!=',1)->get();
-            $result = SystemPermission::whereNull('parent_id')->orderby('sort_order','ASC')->paginate(2);
+            $result = SystemPermission::whereNull('parent_id')->orderby('sort_order','ASC')->simplePaginate(3);
             $data = [];
             foreach ($result as $value) {
                 $child_data = [];

@@ -137,9 +137,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="custom-pagination d-flex">
-                    {{ $pagination->links() }}
-                </div>
+            </div>
+            <div class="pagination">
+                {{ $pagination->links() }}
             </div>
    		</div>
        
