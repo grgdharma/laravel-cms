@@ -18,6 +18,7 @@ class PostSeeder extends Seeder
         $posts = [
             [
                 'category_id'   => 1,
+                'author_type'   => 'admin',
                 'author_id'     => 1,
                 'title'         => 'Hello World',
                 'slug'          => 'hello-world',
@@ -27,6 +28,7 @@ class PostSeeder extends Seeder
             ],
             [
                 'category_id'   => 1,
+                'author_type'   => 'admin',
                 'author_id'     => 1,
                 'title'         => 'Hello World 1',
                 'slug'          => 'hello-world-1',
