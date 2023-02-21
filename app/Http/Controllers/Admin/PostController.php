@@ -27,6 +27,7 @@ class PostController extends Controller
         $status         = $request->input('status');
         
         $data = array(
+            'author_type'   => 'admin',
             'author_id'     => Auth::guard('admin')->user()->id,
             'category_id'   => $category,
             'title'         => $title,
