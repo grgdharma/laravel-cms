@@ -72,7 +72,25 @@ h2{
   background: #ddd;
   margin-top: 20px;
 }
-
+.author-info{
+    display: flex;
+    width: 100%;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+.author-info div{
+  float: left;
+}
+.author-info span {
+  margin-left: 10px;
+}
+.author-image div {
+    width: 58px;
+    height: 58px;
+    border: solid 5px #FFFFFF;
+    border-radius: 50%;
+    overflow: hidden;
+}
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
   .leftcolumn, .rightcolumn {   

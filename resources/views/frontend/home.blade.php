@@ -17,7 +17,19 @@
                     @foreach ($post_lists as $post)
                         <div class="card">
                             <h2><a href="{{ route('post.detail',$post->slug) }}">{{ $post->title }}</a></h2>
-                            <span>Title description, {{ date('M d, Y', strtotime($post->created_at)) }}</span>
+                            <div class="author-info">
+                                <div class="author-image">
+                                    <div>
+                                        @php 
+                                            $author_avatar = getPostAuthor($post)->avatar ?getImageURL(getPostAuthor($post)->avatar): asset('admin/image/default-logo.png');
+                                        @endphp
+									    <img src="{{ $author_avatar }}">						
+                                    </div>
+                                </div>
+                                <div class="post-meta"> 
+                                    <span class="author-name">{{ getPostAuthor($post)->name }}, </span><span class="created-date"> {{ date('M d, Y', strtotime($post->created_at)) }}</span>
+                                </div>
+                            </div>
                             <div class="post-content">
                                 {!! $post->meta_description !!}
                             </div>
