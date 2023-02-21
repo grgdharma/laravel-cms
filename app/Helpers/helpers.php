@@ -5,6 +5,9 @@
 use Illuminate\Support\Facades\Auth;
 use App\Models\SystemPermission;
 use App\Models\VisitorCount;
+use App\Models\Post;
+use App\Models\Admin;
+use App\Models\User;
 
 if (! function_exists('get_general_setting')) {
     function get_general_setting($column_name){
@@ -177,4 +180,17 @@ if(!function_exists('getIPAddress')){
         }  
         return $ip;  
     }  
+}
+if(!function_exists('getPostAuthor')){
+    function getPostAuthor($post){
+        $author_type = $post->author_type;
+        $author_id   = $post->author_id;
+        $author_info = "";
+        if($author_type == 'admin'){
+            $author_info = Admin::where('id',$author_id)->first();
+        }else{
+            $author_info = User::where('id',$author_id)->first();
+        }
+        return $author_info;
+    }
 }
