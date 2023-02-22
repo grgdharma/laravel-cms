@@ -18,16 +18,19 @@
                         <div class="card">
                             <h2><a href="{{ route('post.detail',$post->slug) }}">{{ $post->title }}</a></h2>
                             <div class="author-info">
+                                @php
+                                    $author_info = getPostAuthor($post);
+                                @endphp
                                 <div class="author-image">
                                     <div>
                                         @php 
-                                            $author_avatar = getPostAuthor($post)->avatar ?getImageURL(getPostAuthor($post)->avatar): asset('admin/image/default-logo.png');
+                                            $author_avatar = $author_info !="" && $author_info->avatar !="" ?getImageURL($author_info->avatar): asset('admin/image/default-logo.png');
                                         @endphp
 									    <img src="{{ $author_avatar }}">						
                                     </div>
                                 </div>
                                 <div class="post-meta"> 
-                                    <span class="author-name">{{ getPostAuthor($post)->name }}, </span><span class="created-date"> {{ date('M d, Y', strtotime($post->created_at)) }}</span>
+                                    <span class="author-name">{{ $author_info !="" ? $author_info->name:'Anonymous' }}, </span><span class="created-date"> {{ date('M d, Y', strtotime($post->created_at)) }}</span>
                                 </div>
                             </div>
                             <div class="post-content">

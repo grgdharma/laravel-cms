@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 use Mail;
+use File;
+use Storage;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -76,6 +78,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'verification_code' => $verification_code,
         ]);
+        // Create files directory
+        $directory = "u".$user->id;
+        $path = 'files/'.$directory;
+        $disk = getStorageDisk();
+        $directory = Storage::disk($disk)->makeDirectory($path);
+        Storage::disk($disk)->setVisibility($path, 'public');
         // Send Verification Mail
         try{
             Mail::send(new EmailVerificationMail($user));

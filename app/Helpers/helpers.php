@@ -191,6 +191,9 @@ if(!function_exists('getPostAuthor')){
         }else{
             $author_info = User::where('id',$author_id)->first();
         }
+        if(isset($author_info)){
+            $author_info = $author_info;
+        }
         return $author_info;
     }
 }

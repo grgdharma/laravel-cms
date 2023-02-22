@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             SystemPermissionTableSeeder::class,
             PostCategorySeeder::class,
             PostSeeder::class,
-            UserTableSeeder::class,
         ]);
     
     }

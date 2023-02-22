@@ -165,7 +165,7 @@
 	});
 	$('#modal-image #button-delete').on('click', function(e) {
 		
-		if (confirm('Are you sure ?')) {
+		if (confirm('Do you really want to delete it?')) {
 
 			var token = "{{csrf_token()}}";
 			var directory= "{{$parent}}";

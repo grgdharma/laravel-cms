@@ -16,7 +16,7 @@ class FileManagerController extends Controller
      */
     public function __construct()
     {
-        $this->parent_directory = 'images';
+        $this->parent_directory = 'files';
         $this->disk = getStorageDisk();
     }
     /**
