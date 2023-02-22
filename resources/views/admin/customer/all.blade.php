@@ -59,7 +59,7 @@
                                 </tr>
                                 @endforeach
                             @else 
-                            <tr><td colspan="7">Not found.</td></tr>
+                            <tr><td colspan="9">Not found.</td></tr>
                             @endif
                         </tbody>
                     </table>

@@ -17,7 +17,7 @@ class FileManagerController extends Controller
      */
     public function __construct()
     {
-        $this->parent_directory = 'images';
+        $this->parent_directory = 'files';
         $this->disk = getStorageDisk();
     }
     
@@ -28,7 +28,9 @@ class FileManagerController extends Controller
      */
     public function index()
     {
-    	if(isset($_GET['target_id'])){
+    	$user_id = Auth::user()->id;
+        $sub_dir = "u".$user_id;
+        if(isset($_GET['target_id'])){
             Session::put('target_id', $_GET['target_id']);
             $target_id = Session::get('target_id');
         }else{
@@ -49,11 +51,11 @@ class FileManagerController extends Controller
         if (isset($_GET['directory'])) {
             $parent_name = str_replace('*', '', $_GET['directory']);
             $directory_name = $_GET['directory'] !=''? str_replace('*', '', $_GET['directory']).'/':'';
-            $directory = $this->parent_directory.'/'.$directory_name;
+            $directory = $this->parent_directory."/".$sub_dir."/".$directory_name;
         }else{
             $parent_name = '';
             $directory_name = '';
-            $directory = $this->parent_directory;
+            $directory = $this->parent_directory."/".$sub_dir;
         }
         // Get directories
         $directories = Storage::disk($this->disk)->directories($directory);
@@ -112,17 +114,18 @@ class FileManagerController extends Controller
      */
     public function upload_file(Request $request){
         $user_id = Auth::user()->id;
+        $sub_dir = "u".$user_id;
         $directory = $request->input('directory') !=''? $request->input('directory').'/':'';
         $this->validate($request, [
             'file_name' => 'required|mimes:mp4,pdf,jpeg,png,jpg,gif,svg|max:2048',
         ]);
         //$file_name = $request->file_name->getClientOriginalName();
-        $file_name = rand()."-".$user_id.'.'.$request->file_name->extension();
-        $result = $request->file_name->storeAs($this->parent_directory.'/'.$directory, $file_name, $this->disk );
+        $file_name = rand().'.'.$request->file_name->extension();
+        $result = $request->file_name->storeAs($this->parent_directory.'/'.$sub_dir.'/'.$directory, $file_name, $this->disk );
         if ($result) {
 
             Storage::disk($this->disk)->setVisibility($result, 'public');
-            $response['success'] = "File uploaded successfully.";
+            $response['success'] = "Successfully uploaded a file.";
             
         }else{
             $response['error'] = "Sorry, something wrong with uploading the file.";
