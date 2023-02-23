@@ -62,8 +62,9 @@ class FrontendController extends Controller
         if(isset($page)){
             visitorCount('page_detail',$page->id);
             $template_name = $page->template;
-
+            // new
             $data['page_title']         = $page->title; 
+            $data['meta_title']         = $page->title;
             $data['meta_keywords']      = isset($page->meta_keywords) && $page->meta_keywords !=""? $page->meta_keywords: config('generals.site_meta_keyword');
             $data['meta_description']   = $page->meta_description; 
             $data['featured_image']     = $page->image ? $page->image : config('generals.site_featured_image');
@@ -72,6 +73,9 @@ class FrontendController extends Controller
             $data['description']        = $page->description; 
             $data['thumbnail']          = $page->thumbnail;
             $data['image']              = $page->image;
+            $data['post']               = $page;
+
+            $data['categories'] = PostCategory::where('status',1)->get();
             if($template_name !=''){
                 return view('frontend.template.'.$template_name,$data);
             }else{
@@ -111,7 +115,6 @@ class FrontendController extends Controller
         $post = Post::where('slug',$slug)->where('status',1)->first();
         if(isset($post)){
             visitorCount('post_detail',$post->id);
-            $template_name = $post->template;
             
             $data['page_title']         = $post->title; 
             $data['meta_title']         = $post->title;
@@ -124,14 +127,11 @@ class FrontendController extends Controller
             $data['thumbnail']          = $post->thumbnail;
             $data['image']              = $post->image;
             $data['created_at']         = $post->created_at;
+            $data['post']               = $post;
 
             $data['categories'] = PostCategory::where('status',1)->get();
+            return view('frontend.template.default',$data);
 
-            if($template_name !=''){
-                return view('frontend.template.'.$template_name,$data);
-            }else{
-                return view('frontend.template.default',$data);
-            }
         }else{
             return redirect()->route('home');
         }
