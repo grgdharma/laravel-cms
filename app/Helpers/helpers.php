@@ -8,6 +8,7 @@ use App\Models\VisitorCount;
 use App\Models\Post;
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\Pages;
 
 if (! function_exists('get_general_setting')) {
     function get_general_setting($column_name){
@@ -112,6 +113,7 @@ if (! function_exists('getRouteLists')) {
         echo "</tbody></table>";
     }
 }
+// side menu for admin dashboard
 if (! function_exists('getSideMenu')) {
     function getSideMenu(){
         $admin_group = Auth::guard('admin')->user()->role_id;
@@ -195,5 +197,21 @@ if(!function_exists('getPostAuthor')){
             $author_info = $author_info;
         }
         return $author_info;
+    }
+}
+// Get footer menu
+if(!function_exists('getNavMenu')){
+    function getNavMenu($location){
+        $nav_menu = Pages::get();
+        $data = [];
+        if(count($nav_menu) > 0){
+            foreach($nav_menu as $menu){
+                $data[] = [
+                    'title' => $menu->title,
+                    'slug'  => $menu->slug,
+                ];
+            }
+        }
+        return $data;
     }
 }

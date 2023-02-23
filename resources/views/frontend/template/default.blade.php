@@ -15,7 +15,22 @@
             <div class="leftcolumn">
                 <div class="card">
                     <h2> {{ $page_title }} </h2>
-                    <span>DRG, {{ date('M d, Y', strtotime($created_at)) }}</span>
+                    <div class="author-info">
+                        @php
+                            $author_info = getPostAuthor($post);
+                        @endphp
+                        <div class="author-image">
+                            <div>
+                                @php 
+                                    $author_avatar = $author_info !="" && $author_info->avatar !="" ?getImageURL($author_info->avatar): asset('admin/image/default-logo.png');
+                                @endphp
+                                <img src="{{ $author_avatar }}">						
+                            </div>
+                        </div>
+                        <div class="post-meta"> 
+                            <span class="author-name">{{ $author_info !="" ? $author_info->name:'Anonymous' }}, </span><span class="created-date"> {{ date('M d, Y', strtotime($post->created_at)) }}</span>
+                        </div>
+                    </div>
                     <img src="{{getImageURL($image)}}" class="img-responsive">
                     <div class="">
                         {!! $description !!}

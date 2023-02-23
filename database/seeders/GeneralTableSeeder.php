@@ -36,7 +36,7 @@ class GeneralTableSeeder extends Seeder
             ],
             [
                 'key' => 'site_copyright',
-		    	'value' => ''
+		    	'value' => 'Copyright © 2022 Your Site. All Rights Reserved.'
             ],
             [
                 'key' => 'site_meta_title',
