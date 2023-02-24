@@ -14,8 +14,11 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-        $ip_address = '103.124.96.3';
-        //$ip_address = request()->ip(); //Dynamic IP address get
+        
+        $ip_address = request()->ip(); //Dynamic IP address get
+        if($ip_address == '127.0.0.1'){
+            $ip_address = '49.244.91.241';
+        }
         $location_info = \Location::get($ip_address); 
         // Location information
     	$data['ip_address']     = $location_info->ip;
