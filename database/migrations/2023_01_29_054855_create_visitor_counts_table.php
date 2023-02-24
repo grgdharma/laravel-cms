@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('referrer')->nullable();
             $table->mediumText('user_agent')->nullable();
             $table->mediumText('notes')->nullable();
+            $table->string('visited_date');
+            $table->string('visited_time');
             $table->timestamps();
-            $table->index(['key','key_value']);
+            $table->index(['key','key_value','ip_address']);
         });
     }
 
