@@ -7,10 +7,21 @@
     @include('admin.includes.topbar')
     <div class="page-content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 Welcome {{Auth::user()->name}}, you are logged in!  
             </div>
-
+            @if($ip_address)
+            <div class="col-md-4">
+                <table class="table table-bordered">
+                    <tr><td>IP</td><td>:</td><td>{{ $ip_address }}</td></tr>
+                    <tr><td> Country Name </td><td>:</td><td>{{ $countryName }}</td></tr>
+                    <tr><td> Region Name </td><td>:</td><td>{{ $regionName }}</td></tr>
+                    <tr><td> City Name </td><td>:</td><td>{{ $cityName }}</td> </tr>
+                    <tr><td> Latitude </td><td>:</td><td>{{ $latitude }}</td> </tr>
+                    <tr><td> Longitude </td><td>:</td><td>{{ $longitude }}</td> </tr>
+                </table>
+            </div>
+            @endif
         </div>
     </div>
 </div>

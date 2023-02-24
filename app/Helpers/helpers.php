@@ -183,6 +183,14 @@ if(!function_exists('getIPAddress')){
         return $ip;  
     }  
 }
+// Get a location by IP address
+if(!function_exists('getLocationByIp')){
+    function getLocationByIp($ip_address){
+        $ip_address = '103.239.147.187'; //For static IP address get
+        //$ip_address = request()->ip(); //Dynamic IP address get
+        return \Location::get($ip_address);  
+    }
+}
 if(!function_exists('getPostAuthor')){
     function getPostAuthor($post){
         $author_type = $post->author_type;

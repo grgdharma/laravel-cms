@@ -13,8 +13,22 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-    	return view('admin.dashboard');
+    {   
+        
+        $ip_address = request()->ip(); //Dynamic IP address get
+        if($ip_address == '127.0.0.1'){
+            $ip_address = '49.244.91.241';
+        }
+        $location_info = \Location::get($ip_address); 
+        // Location information
+    	$data['ip_address']     = $location_info->ip;
+        $data['countryName']    = $location_info->countryName;
+        $data['regionName']     = $location_info->regionName;
+        $data['cityName']       = $location_info->cityName;
+        $data['latitude']       = $location_info->latitude;
+        $data['longitude']      = $location_info->longitude;
+
+        return view('admin.dashboard',$data);
     }
 
 
