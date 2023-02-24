@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\Admin;
 use App\Models\User;
 use App\Models\Pages;
+use Carbon\Carbon;
 
 if (! function_exists('get_general_setting')) {
     function get_general_setting($column_name){
@@ -157,15 +158,22 @@ if(!function_exists('visitorCount')){
         if(isset($_SERVER['HTTP_REFERER'])) {
             $referrer = $_SERVER['HTTP_REFERER'];
         }
-        $data = [
-            'key'          => $key,
-            'key_value'    => $key_valye,
-            'ip_address'   => getIPAddress(),
-            'referrer'     => $referrer,
-            'user_agent'   => $_SERVER['HTTP_USER_AGENT'],
-            'notes'        => $notes
-        ];
-        VisitorCount:: create($data);
+        $ip_address = getIPAddress();
+        $visitor_count = VisitorCount::where('key',$key)->where('ip_address',$ip_address)->where('visited_date',date('Y-m-d'))->count();
+        if($visitor_count < 5000){
+            $data = [
+                'key'          => $key,
+                'key_value'    => $key_valye,
+                'ip_address'   => $ip_address,
+                'visited_date' => date('Y-m-d'),
+                'visited_time' => date('H:i'),
+            ];
+            $result = VisitorCount:: firstOrCreate($data);
+            $result->referrer   = $referrer;
+            $result->user_agent = $_SERVER['HTTP_USER_AGENT'];
+            $result->notes      = $notes;
+            $result->save();
+        }
     }
 }
 if(!function_exists('getIPAddress')){
