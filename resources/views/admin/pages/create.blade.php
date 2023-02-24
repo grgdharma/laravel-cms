@@ -111,7 +111,7 @@
 @section('script')
 <script>
     var common = {
-        height: 100,
+        height: '400px',
         toolbarGroups: [{
             "name": "basicstyles",
             "groups": ["basicstyles"]
@@ -132,6 +132,6 @@
         ],
         removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
     };
-    CKEDITOR.replace( 'information-description',common);
+    CKEDITOR.replace('information-description',common);
 </script>
 @endsection

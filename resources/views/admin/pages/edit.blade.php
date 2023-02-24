@@ -111,7 +111,7 @@
 @section('script')
 <script>
     var common = {
-        height: 100,
+        height: '400px',
         toolbarGroups: [{
             "name": "basicstyles",
             "groups": ["basicstyles"]
