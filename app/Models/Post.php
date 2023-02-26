@@ -20,9 +20,14 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * The has Many Relationship
+     *
+     * @var array
+     */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+        return $this->hasMany(PostComment::class)->whereNull('parent_id');
     }
 
     /**

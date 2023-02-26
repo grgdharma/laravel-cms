@@ -35,6 +35,7 @@
                     <div class="">
                         {!! $description !!}
                     </div>
+                    @include('frontend.template.comment')
                 </div>
             </div>
             @include('frontend.includes.sidebar')
