@@ -24,6 +24,6 @@
             </form>
         </div>
         @endguest
-        @include('frontend.template.commentsDisplay', ['comments' => $comment->replies])
+        @include('admin.pages.commentsDisplay', ['comments' => $comment->replies])
     </div>
 @endforeach

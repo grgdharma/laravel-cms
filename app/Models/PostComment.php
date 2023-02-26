@@ -10,6 +10,10 @@ class PostComment extends Model
     use HasFactory;
     protected $fillable = ['user_type','user_id', 'post_id', 'parent_id', 'comment','status'];
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class,"user_id");
+    }
     /**
      * The belongs to Relationship
      *
@@ -28,5 +32,10 @@ class PostComment extends Model
     public function replies()
     {
         return $this->hasMany(PostComment::class, 'parent_id');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
     }
 }
