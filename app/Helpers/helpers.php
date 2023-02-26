@@ -152,6 +152,7 @@ if (! function_exists('getSideMenu')) {
         return $data;
     }
 }
+// Visitor information
 if(!function_exists('visitorCount')){
     function visitorCount($key, $key_valye = null,$notes = null){
         $referrer = "";
@@ -190,6 +191,11 @@ if(!function_exists('getIPAddress')){
         }  
         return $ip;  
     }  
+}
+if(!function_exists('getPageVisitorCount')){
+    function getPageVisitorCount($page){
+        return VisitorCount::where('key',$page)->count();
+    }
 }
 // Get a location by IP address
 if(!function_exists('getLocationByIp')){

@@ -70,5 +70,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:admin'], 'namespace' =>
     Route::get('/edit/{id}/category', 'PostCategoryController@edit')->name('admin.post.category.edit');
     Route::post('/category/{id}/update', 'PostCategoryController@update')->name('admin.post.category.update');
     Route::delete('/category/{id}/delete', 'PostCategoryController@destroy')->name('admin.post.category.delete');
-
+    // Visitor information
+    Route::get('/visitor-info/{type}', 'VisitorInfoController@index')->name('visitor.info');
 });
