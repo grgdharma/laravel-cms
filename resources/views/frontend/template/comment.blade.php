@@ -1,11 +1,13 @@
 <div id="comment-section">
-    <h4>Display Comments</h4>
-    @include('frontend.template.commentsDisplay', ['comments' => $post->comments, 'post_id' => $post->id])
+    @if (count($post->comments)>0)
+        <h1>Display Comments</h1>
+        @include('frontend.template.commentsDisplay', ['comments' => $post->comments, 'post_id' => $post->id])
+    @endif
     @guest
     <span>Please, <a href="{{ route('login') }}"> Login </a> to comment on the post. </span>
     @else
     <div class="comment-form">
-        <h4>Add comment</h4>
+        <h1>Add comment</h1>
         <form method="post" action="{{ route('comment.store') }}">
             @csrf
             <div class="form-group">

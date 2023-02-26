@@ -1,12 +1,24 @@
 @foreach($comments as $comment)
     <div class="display-comment" @if($comment->parent_id != null) style="margin-left:40px;" @endif>
         <div class="commenter-info">
-            @if($comment->user_type =='user')
-            <strong> {{ $comment->user->name }}</strong>
-            @else
-            <strong>{{ $comment->admin->name }} [Admin]</strong>
-            @endif
-            <p>{{ $comment->comment }}</p>
+            <div class="author-info">
+                <div class="author-image">
+                    <div>
+                        @php 
+                            $author_avatar = $comment->user !="" && $comment->user->avatar !="" ?getImageURL($comment->user->avatar): asset('admin/image/default-logo.png');
+                        @endphp
+                        <img src="{{ $author_avatar }}">						
+                    </div>
+                </div>
+                <div class="post-meta"> 
+                    @if($comment->user_type =='user')
+                    <span class="author-name">{{ $comment->user !="" ? $comment->user->name:'Anonymous' }}, </span><span class="created-date"> {{ date('M d, Y H:i:s', strtotime($comment->created_at)) }}</span>
+                    @else
+                    <span class="author-name">{{ $comment->admin !="" ? $comment->admin->name:'Anonymous' }}, </span><span class="created-date"> {{ date('M d, Y H:i:s', strtotime($comment->created_at)) }}</span>
+                    @endif
+                </div>
+            </div>
+            <div class="post-comment">{!! $comment->comment !!}</div>
         </div>
         @guest
         @else
