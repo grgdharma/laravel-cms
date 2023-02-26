@@ -22,7 +22,32 @@
                 </table>
             </div>
             @endif
+            <div class="col-md-4">
+                <div id="visitor-info"> 
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        $(window).on('load', function (){
+            getVisitorInfo('All');
+        });
+        function getVisitorInfo(type){
+            var url = "{{route('visitor.info', '')}}"+"/"+type;
+            $.ajax({
+                url: url,
+                method: 'GET',
+                beforeSend: function () {
+                    $('#visitor-info').html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+                },
+                success: function (data) {
+                    $('#visitor-info').html(data.visitor_info);
+                }
+            });    
+        }
+    </script>
 @endsection
