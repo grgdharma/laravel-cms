@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <img src="{{getImageURL($image)}}" class="img-responsive">
-                    <div class="">
+                    <div class="description">
                         {!! $description !!}
                     </div>
                     @include('frontend.template.comment')
