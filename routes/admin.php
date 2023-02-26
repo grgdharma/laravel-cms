@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:admin'], 'namespace' =>
     Route::get('/edit/{id}/post', 'PostController@edit')->name('admin.post.edit');
     Route::post('/post/{id}/update', 'PostController@update')->name('admin.post.update');
     Route::delete('/post/{id}/delete', 'PostController@destroy')->name('admin.post.delete');
+    // Post comment
+    Route::get('/comment', 'PostCommentController@index')->name('comments.list');
+    Route::get('/detail/{id}/comment', 'PostCommentController@show')->name('comments.show');
+    Route::post('/comment/store', 'PostCommentController@store')->name('comment.store');
+
     // Categories
     Route::get('/category', 'PostCategoryController@index')->name('admin.post.category');
     Route::get('/create/category', 'PostCategoryController@create')->name('admin.post.category.create');
