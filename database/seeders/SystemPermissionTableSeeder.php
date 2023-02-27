@@ -164,6 +164,26 @@ class SystemPermissionTableSeeder extends Seeder
                 'sort_order'=> 2,
                 'icon'      => ''
             ],
+            [
+                'parent_id' => 3,
+                'name'      => 'Comments',
+                'route_url' => 'admin/comment',
+                'route_name'=> 'comments.list',
+                'role_id'   => json_encode(['1']),
+                'status'    => 1,
+                'sort_order'=> 3,
+                'icon'      => 'message-circle'
+            ],
+            [
+                'parent_id' => 17,
+                'name'      => 'Comment Details',
+                'route_url' => 'admin/detail/{id}/comment',
+                'route_name'=> 'comments.show',
+                'role_id'   => json_encode(['1']),
+                'status'    => 1,
+                'sort_order'=> 0,
+                'icon'      => 'arrow-right'
+            ],
 
         ];
 
