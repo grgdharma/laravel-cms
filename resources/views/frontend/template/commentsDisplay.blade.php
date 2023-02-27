@@ -23,7 +23,7 @@
         @guest
         @else
         <div class="comment-form">
-            <form method="post" action="{{ route('comment.store') }}">
+            <form method="post" action="{{ route('user.comment.store') }}">
                 @csrf
                 <div class="form-group">
                     <input type="text" name="comment" class="form-control" />

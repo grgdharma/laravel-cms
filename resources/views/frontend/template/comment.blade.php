@@ -8,7 +8,7 @@
     @else
     <div class="comment-form">
         <h1>Add comment</h1>
-        <form method="post" action="{{ route('comment.store') }}">
+        <form method="post" action="{{ route('user.comment.store') }}">
             @csrf
             <div class="form-group">
                 <textarea class="form-control @error('comment') is-invalid @enderror" name="comment"></textarea>
