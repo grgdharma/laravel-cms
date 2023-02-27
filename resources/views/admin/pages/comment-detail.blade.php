@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Page | Lists')
+@section('title','Comment | Details')
 @section('content')
 
 @include('admin.includes.sidebar')

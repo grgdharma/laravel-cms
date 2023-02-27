@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Page | Lists')
+@section('title','Comment | Lists')
 @section('content')
 
 @include('admin.includes.sidebar')
@@ -16,7 +16,6 @@
                             <tr>
                                 <th style="width:50px;">SN</th>
                                 <th>Title</th>
-                                <th style="width:100px;">Status</th>
                                 <th style="width:100px;">Action</th>
                             </tr>
                         </thead>
@@ -28,20 +27,7 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$value->post->title}}</td>
                                     <td>
-                                        @if($value->status == 1)
-                                            <i style="color: green;" class="fa fa-check-circle" aria-hidden="true"></i>
-                                        @else
-                                            <i style="color: red;" class="fa fa-times" aria-hidden="true"></i>
-                                        @endif
-                                    </td>
-                                    <td>
                                         <a href="{{route('comments.show',$value->post_id)}}" class="custom-btn edit"> <i class="fa fa-eye"></i></a>
-                            
-                                        <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->post_id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->post_id}}" action="{{ route('admin.catalog.page.delete', $value->post_id) }}" method="POST" style="display:none">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="delete">
-                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -57,14 +43,4 @@
                 
     </div>
 </div>
-@endsection
-@section('script')
-<script type="text/javascript">
-    function checkDelete(id){
-        var x = confirm('Are you sure want to delete it?');
-        if(x){
-            document.getElementById('delete-'+id).submit();
-        }
-    }
-</script>
 @endsection

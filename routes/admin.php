@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth:admin'], 'namespace' =>
     Route::get('/comment', 'PostCommentController@index')->name('comments.list');
     Route::get('/detail/{id}/comment', 'PostCommentController@show')->name('comments.show');
     Route::post('/comment/store', 'PostCommentController@store')->name('comment.store');
+    Route::delete('/comment/{id}/delete', 'PostCommentController@destroy')->name('comment.delete');
 
     // Categories
     Route::get('/category', 'PostCategoryController@index')->name('admin.post.category');

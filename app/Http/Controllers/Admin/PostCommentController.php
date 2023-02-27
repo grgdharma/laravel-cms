@@ -106,6 +106,15 @@ class PostCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $result =  PostComment::find($id)->delete();
+            if($result) {
+                return back()->with('success','Success, you have deleted a comment.');   
+            }else{
+                return back()->with('error','Sorry, something is wrong.');   
+            }
+        }catch(\Exception $e){
+            return redirect()->route('comments.list')->with('error',$e->getMessage());  
+        }
     }
 }
