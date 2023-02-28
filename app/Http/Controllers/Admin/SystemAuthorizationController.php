@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\AdminRole;
 use App\Http\Controllers\Controller;
-use App\Models\SystemPermission;
+use App\Models\SystemAuthorization;
 use Illuminate\Http\Request;
 
-class SystemPermissionController extends Controller
+class SystemAuthorizationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +17,15 @@ class SystemPermissionController extends Controller
     {
         if(checkAuthorization() == true){
             $data_collection['role'] = AdminRole::where('id','!=',1)->get();
-            $result = SystemPermission::whereNull('parent_id')->orderby('sort_order','ASC')->simplePaginate(3);
+            $result = SystemAuthorization::whereNull('parent_id')->orderby('sort_order','ASC')->simplePaginate(3);
             $data = [];
             foreach ($result as $value) {
                 $child_data = [];
-                $child_list = SystemPermission::where('parent_id',$value['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
+                $child_list = SystemAuthorization::where('parent_id',$value['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
                 if(count($child_list) > 0){
                     foreach($child_list as $child){
                         $child_child_data = [];
-                        $child_child_list = SystemPermission::where('parent_id',$child['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
+                        $child_child_list = SystemAuthorization::where('parent_id',$child['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
                         if(count($child_child_list) > 0){
                             foreach($child_child_list as $child_list){
                                 $child_child_data[] = [
@@ -64,7 +64,7 @@ class SystemPermissionController extends Controller
             }
             $data_collection['permission'] = $data;
             $data_collection['pagination'] = $result;
-            return view('admin.permission.all',$data_collection);
+            return view('admin.authorization.all',$data_collection);
         }else{
             return view('errors.401');
         }
@@ -92,7 +92,7 @@ class SystemPermissionController extends Controller
                 'parent_id' => $request->input('parent_id'),
                 'sort_order'=> $request->input('sort_order') !=''?$request->input('sort_order'):0,
             );
-            $result = SystemPermission::create($data);
+            $result = SystemAuthorization::create($data);
             if ($result) {
                 return back()->with('success','Successfully added data.');   
             }else{
@@ -112,12 +112,12 @@ class SystemPermissionController extends Controller
     public function edit(Request $request)
     {
         $id         = $request->input('model_id');
-        $edit_data  = SystemPermission::where('id',$id)->first();
+        $edit_data  = SystemAuthorization::where('id',$id)->first();
         if(isset($edit_data)){
             $data['role']   = AdminRole::where('id','!=',1)->get();
             $data['edit']   = $edit_data;
             $data['id']     = $id;
-            return view('admin.permission.edit',$data);
+            return view('admin.authorization.edit',$data);
         }else{
             return view('errors.401');
         }
@@ -135,7 +135,7 @@ class SystemPermissionController extends Controller
             'name' => 'required|max:255',
         ]);
         try{
-            $edit = SystemPermission::where('id',$id)->get()->toArray();
+            $edit = SystemAuthorization::where('id',$id)->get()->toArray();
             $value       = $edit[0]['role_id'];
             $data = array(
                 'name'      => $request->input('name'),
@@ -147,7 +147,7 @@ class SystemPermissionController extends Controller
                 'parent_id' => $request->input('parent_id'),
                 'sort_order'=> $request->input('sort_order') !=''?$request->input('sort_order'):0,
             );
-            $result = SystemPermission::where('id', $id)->update($data);
+            $result = SystemAuthorization::where('id', $id)->update($data);
             if ($result) {
                 return back()->with('success','Successfully updated data.');   
             }else{
@@ -165,7 +165,7 @@ class SystemPermissionController extends Controller
     public function destroy($id)
     {
         try{
-            $result = SystemPermission::find($id)->delete();
+            $result = SystemAuthorization::find($id)->delete();
             if ($result) {
                 return back()->with('success','Successfully deleted data.');   
             }else{
@@ -194,9 +194,9 @@ class SystemPermissionController extends Controller
             'role_id' => $value
         );
         try{
-            $result = SystemPermission::where('id', $id)->update($data);
+            $result = SystemAuthorization::where('id', $id)->update($data);
             if ($result) {
-            $response['message'] = "Successfully updated the route permissions.";
+            $response['message'] = "Successfully updated the route authorization.";
             }else{
                 $response['message'] = "Sorry,somthing wrong.";
             }

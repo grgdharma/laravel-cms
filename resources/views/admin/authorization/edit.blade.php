@@ -3,7 +3,7 @@
         <h4 class="modal-title">Edit</h4>
     </div>
     <div class="modal-body">
-        <form autocomplete="off" method="POST" action="{{route('admin.dashboard.permission.update',$id)}}">
+        <form autocomplete="off" method="POST" action="{{route('system.authorization.update',$id)}}">
             @csrf
             <div class="form-group">
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $edit->name }}" placeholder="Name" required >

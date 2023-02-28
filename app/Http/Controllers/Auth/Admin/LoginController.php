@@ -44,7 +44,7 @@ class LoginController extends Controller
         // attempt to log the user
         if($this->guard()->attempt($request->only('email','password'))){
             // if successful, the redirect to intend location
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('system.dashboard'));
         }
         // if unsuccessful then redirect to back with form data
         return redirect()->back()

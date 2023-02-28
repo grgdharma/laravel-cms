@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             AdminRoleTableSeeder::class,
             AdminTableSeeder::class,
             GeneralTableSeeder::class,
-            SystemPermissionTableSeeder::class,
+            SystemAuthorizationTableSeeder::class,
             PostCategorySeeder::class,
             PostSeeder::class,
             PageSeeder::class,

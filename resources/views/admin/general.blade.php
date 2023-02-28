@@ -34,7 +34,7 @@
             </div>
             <div class="card-body">
                 
-                <form autocomplete="off" method="post" action="{{route('admin.general.update')}}">
+                <form autocomplete="off" method="post" action="{{route('system.general.update')}}">
                     @csrf
                     <div class="row">
                         <div class="col-md-9">

@@ -10,7 +10,7 @@
 		<div class="card">
    			<div class="card-header custom-header">
                 <a href="javascript:void(0);" class="header-tab active"> Categories </a>
-                <a href="{{route('admin.post.category.create')}}" class="header-tab" > Add New </a>
+                <a href="{{route('system.post.category.create')}}" class="header-tab" > Add New </a>
                 @include('admin.includes.alert')
             </div>
             <div class="card-body">
@@ -47,9 +47,9 @@
                                     </td>
                                     <td>{{$value->sort_order}}</td>
                                     <td>
-                                        <a href="{{route('admin.post.category.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
+                                        <a href="{{route('system.post.category.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->id}}" action="{{ route('admin.post.category.delete', $value->id) }}" method="POST" style="display:none">
+                                        <form id="delete-{{$value->id}}" action="{{ route('system.post.category.delete', $value->id) }}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>

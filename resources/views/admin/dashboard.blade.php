@@ -37,7 +37,7 @@
             getVisitorInfo('All');
         });
         function getVisitorInfo(type){
-            var url = "{{route('visitor.info', '')}}"+"/"+type;
+            var url = "{{route('system.visitor.info', '')}}"+"/"+type;
             $.ajax({
                 url: url,
                 method: 'GET',

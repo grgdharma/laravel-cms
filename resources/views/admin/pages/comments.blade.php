@@ -27,7 +27,7 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$value->post->title}}</td>
                                     <td>
-                                        <a href="{{route('comments.show',$value->post_id)}}" class="custom-btn edit"> <i class="fa fa-eye"></i></a>
+                                        <a href="{{route('system.post.comments.show',$value->post_id)}}" class="custom-btn edit"> <i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

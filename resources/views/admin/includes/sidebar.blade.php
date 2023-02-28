@@ -1,6 +1,6 @@
 <nav class="sidebar">
     <div class="sidebar-header">
-        <a href="{{route('admin.dashboard')}}" class="sidebar-brand">
+        <a href="{{route('system.dashboard')}}" class="sidebar-brand">
         {{getTitle()}}
         </a>
         <div class="sidebar-toggler not-active">
@@ -13,7 +13,7 @@
     <ul class="nav">
         <li class="nav-item nav-category">Main</li>
         <li class="nav-item">
-            <a href="{{route('admin.dashboard')}}" class="nav-link">
+            <a href="{{route('system.dashboard')}}" class="nav-link">
             <i class="fa fa-tachometer" aria-hidden="true"></i>
             <span class="link-title"> Dashboard</span>
             </a>

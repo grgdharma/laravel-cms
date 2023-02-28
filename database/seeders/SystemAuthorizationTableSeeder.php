@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\SystemPermission;
-class SystemPermissionTableSeeder extends Seeder
+use App\Models\SystemAuthorization;
+class SystemAuthorizationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -37,9 +37,9 @@ class SystemPermissionTableSeeder extends Seeder
             ],
             [
                 'parent_id' => 1,
-                'name'      => 'Permission',
-                'route_url' => 'admin/system/permission',
-                'route_name'=> 'admin.dashboard.permission',
+                'name'      => 'Authorization',
+                'route_url' => 'system/authorization',
+                'route_name'=> 'system.authorization',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 1,
@@ -48,8 +48,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 1,
                 'name'      => 'General',
-                'route_url' => 'admin/general',
-                'route_name'=> 'admin.general',
+                'route_url' => 'system/general',
+                'route_name'=> 'system.general',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'icon'      => 'settings'
@@ -57,8 +57,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 1,
                 'name'      => 'Administration',
-                'route_url' => 'admin/system/administration',
-                'route_name'=> 'admin.dashboard.administration',
+                'route_url' => 'system/administration',
+                'route_name'=> 'system.administration',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -67,8 +67,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 2,
                 'name'      => 'Users',
-                'route_url' => 'admin/system/user',
-                'route_name'=> 'admin.dashboard.user',
+                'route_url' => 'system/user',
+                'route_name'=> 'system.user',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -77,8 +77,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Pages',
-                'route_url' => 'admin/catalog/page',
-                'route_name'=> 'admin.catalog.page',
+                'route_url' => 'system/page',
+                'route_name'=> 'system.page',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -87,8 +87,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 8,
                 'name'      => 'Create Page',
-                'route_url' => 'admin/catalog/create/page',
-                'route_name'=> 'admin.catalog.page.create',
+                'route_url' => 'system/create/page',
+                'route_name'=> 'system.page.create',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -97,8 +97,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 8,
                 'name'      => 'Update Page',
-                'route_url' => 'admin/catalog/edit/{id}/page',
-                'route_name'=> 'admin.catalog.page.edit',
+                'route_url' => 'system/edit/{id}/page',
+                'route_name'=> 'system.page.edit',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -107,8 +107,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Posts',
-                'route_url' => 'admin/post',
-                'route_name'=> 'admin.post',
+                'route_url' => 'system/post',
+                'route_name'=> 'system.post',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -117,8 +117,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 11,
                 'name'      => 'Create Post',
-                'route_url' => 'admin/create/post',
-                'route_name'=> 'admin.post.create',
+                'route_url' => 'system/create/post',
+                'route_name'=> 'system.post.create',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -127,8 +127,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 11,
                 'name'      => 'Edit Post',
-                'route_url' => 'admin/edit/{id}/post',
-                'route_name'=> 'admin.post.edit',
+                'route_url' => 'system/edit/{id}/post',
+                'route_name'=> 'system.post.edit',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -137,8 +137,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Categories',
-                'route_url' => 'admin/category',
-                'route_name'=> 'admin.post.category',
+                'route_url' => 'system/post/category',
+                'route_name'=> 'system.post.category',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -147,8 +147,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 14,
                 'name'      => 'Create',
-                'route_url' => 'admin/create/category',
-                'route_name'=> 'dmin.post.category.create',
+                'route_url' => 'system/post/create/category',
+                'route_name'=> 'system.post.category.create',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -157,8 +157,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 14,
                 'name'      => 'Edit',
-                'route_url' => 'admin/edit/{id}/category',
-                'route_name'=> 'admin.post.category.edit',
+                'route_url' => 'system/post/edit/{id}/category',
+                'route_name'=> 'system.post.category.edit',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 2,
@@ -167,8 +167,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Comments',
-                'route_url' => 'admin/comment',
-                'route_name'=> 'comments.list',
+                'route_url' => 'system/post/comment',
+                'route_name'=> 'system.post.comments.list',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 3,
@@ -177,8 +177,8 @@ class SystemPermissionTableSeeder extends Seeder
             [
                 'parent_id' => 17,
                 'name'      => 'Comment Details',
-                'route_url' => 'admin/detail/{id}/comment',
-                'route_name'=> 'comments.show',
+                'route_url' => 'system/post/detail/{id}/comment',
+                'route_name'=> 'system.post.comments.show',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
                 'sort_order'=> 0,
@@ -188,7 +188,7 @@ class SystemPermissionTableSeeder extends Seeder
         ];
 
         foreach ($permission as $value) {
-            SystemPermission::create($value);
+            SystemAuthorization::create($value);
         }
     }
 }

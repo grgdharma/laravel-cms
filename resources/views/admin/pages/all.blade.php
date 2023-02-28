@@ -10,7 +10,7 @@
 		<div class="card">
    			<div class="card-header">
                 <a href="javascript:void(0);" class="header-tab active"> Pages </a>
-                <a href="{{route('admin.catalog.page.create')}}" class="header-tab" > Add New </a>
+                <a href="{{route('system.page.create')}}" class="header-tab" > Add New </a>
                 @include('admin.includes.alert')
             </div>
             <div class="card-body">
@@ -46,9 +46,9 @@
                                     <td><span>{{$value->sort_order}}</span></td>
                                     <td>
                                         <a href="{{route('page.detail',$value->slug)}}" target="_blank" class="custom-btn edit"> <i class="fa fa-eye"></i></a>
-                                        <a href="{{route('admin.catalog.page.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
+                                        <a href="{{route('system.page.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->id}}" action="{{ route('admin.catalog.page.delete', $value->id) }}" method="POST" style="display:none">
+                                        <form id="delete-{{$value->id}}" action="{{ route('system.page.delete', $value->id) }}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>

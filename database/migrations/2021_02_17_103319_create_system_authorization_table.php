@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSystemPermissionsTable extends Migration
+class CreateSystemAuthorizationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSystemPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('system_permissions', function (Blueprint $table) {
+        Schema::create('system_authorizations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('system_permissions');
+            $table->foreign('parent_id')->references('id')->on('system_authorizations');
             $table->string('name');
             $table->string('icon')->nullable();
             $table->string('route_url')->nullable();
@@ -35,6 +35,6 @@ class CreateSystemPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system_permissions');
+        Schema::dropIfExists('system_authorizations');
     }
 }

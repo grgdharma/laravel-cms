@@ -10,7 +10,7 @@
 		<div class="card">
    			<div class="card-header">
                 <a href="javascript:void(0);" class="header-tab active"> Posts </a>
-                <a href="{{route('admin.post.create')}}" class="header-tab" > Add New </a>
+                <a href="{{route('system.post.create')}}" class="header-tab" > Add New </a>
                 @include('admin.includes.alert')
             </div>
             <div class="card-body">
@@ -51,9 +51,9 @@
                                     <td><span>{{$value->created_at}}</span></td>
                                     <td>
                                         <a href="{{route('post.detail',$value->slug)}}" target="_blank" class="custom-btn view"> <i class="fa fa-eye"></i></a>
-                                        <a href="{{route('admin.post.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
+                                        <a href="{{route('system.post.edit',$value->id)}}" class="custom-btn edit"> <i class="fa fa-pencil"></i></a>
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->id}}" action="{{ route('admin.post.delete', $value->id) }}" method="POST" style="display:none">
+                                        <form id="delete-{{$value->id}}" action="{{ route('system.post.delete', $value->id) }}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>
