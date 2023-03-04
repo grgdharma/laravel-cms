@@ -11,7 +11,7 @@
             @endif
             <span> 
                 <a href="javascript:void(0);" onclick="return checkDelete({{$comment->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                <form id="delete-{{$comment->id}}" action="{{ route('comment.delete', $comment->id) }}" method="POST" style="display:none">
+                <form id="delete-{{$comment->id}}" action="{{ route('system.post.comment.delete', $comment->id) }}" method="POST" style="display:none">
                     @csrf
                     <input type="hidden" name="_method" value="delete">
                 </form>
@@ -21,7 +21,7 @@
         @guest
         @else
         <div class="comment-form">
-            <form method="post" action="{{ route('comment.store') }}">
+            <form method="post" action="{{ route('system.post.comment.store') }}">
                 @csrf
                 <div class="form-group">
                     <input type="text" name="comment" class="form-control" />

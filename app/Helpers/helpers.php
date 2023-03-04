@@ -3,7 +3,7 @@
  * You can define your own set of helper functions
  */
 use Illuminate\Support\Facades\Auth;
-use App\Models\SystemPermission;
+use App\Models\SystemAuthorization;
 use App\Models\VisitorCount;
 use App\Models\Post;
 use App\Models\Admin;
@@ -20,7 +20,7 @@ if (! function_exists('checkAuthorization')) {
     function checkAuthorization(){
         $admin_group = Auth::guard('admin')->user()->role_id;
         $currentPath = Route::getFacadeRoot()->current()->uri();
-        $privilege = SystemPermission::where('route_url', $currentPath)->get()->toArray();
+        $privilege = SystemAuthorization::where('route_url', $currentPath)->get()->toArray();
         if(count($privilege) > 0 ){
             $privilege = json_decode($privilege[0]['role_id']);
             if(in_array($admin_group, $privilege )) {
@@ -100,7 +100,7 @@ if (! function_exists('getRouteLists')) {
             $route_name = $value->getName();
             $url = $value->uri();
             $first_data = explode('/', $url);
-            if($first_data[0]=='admin' && !in_array($value->methods()[0],['POST','DELETE']) && !in_array($route_name,$exclude_name) ){
+            if($first_data[0]=='system' && !in_array($value->methods()[0],['POST','DELETE']) && !in_array($route_name,$exclude_name) ){
                 echo "<tr title='Double click to slect the data.' class='route-row' data-url='".$value->uri()."' data-name='".$route_name."' >";
                     echo "<td>".$i."</td>";
                     // echo "<td>".implode('|', $value->methods())."</td>";
@@ -118,14 +118,14 @@ if (! function_exists('getRouteLists')) {
 if (! function_exists('getSideMenu')) {
     function getSideMenu(){
         $admin_group = Auth::guard('admin')->user()->role_id;
-        $menu_list = SystemPermission::whereNull('parent_id')->where('status',1)->orderBy('sort_order', 'DESC')->get()->toArray();
+        $menu_list = SystemAuthorization::whereNull('parent_id')->where('status',1)->orderBy('sort_order', 'DESC')->get()->toArray();
         $data = [];
         if(count($menu_list) > 0 ){
             foreach($menu_list as $value){
                 $user_role = json_decode($value['role_id']);
                 if(in_array($admin_group, $user_role )) {
                     $child_data = [];
-                    $child_list = SystemPermission::where('parent_id',$value['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
+                    $child_list = SystemAuthorization::where('parent_id',$value['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
                     if(count($child_list) > 0){
                         foreach($child_list as $child){
                             $user_role = json_decode($child['role_id']);

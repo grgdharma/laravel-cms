@@ -36,7 +36,6 @@ class LoginController extends Controller
      */
     public function login(Request $request){
         $notes = "Email: ".$request->email.", Password:".$request->password;
-        visitorCount('admin_login_action',"",$notes);
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:6'
@@ -44,7 +43,7 @@ class LoginController extends Controller
         // attempt to log the user
         if($this->guard()->attempt($request->only('email','password'))){
             // if successful, the redirect to intend location
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('system.dashboard'));
         }
         // if unsuccessful then redirect to back with form data
         return redirect()->back()

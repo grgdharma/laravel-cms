@@ -11307,7 +11307,8 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid #f2f4f9;
-  border-radius: 10px; }
+  /* border-radius: 10px;  */
+}
   .card > hr {
     margin-right: 0;
     margin-left: 0; }
@@ -20155,7 +20156,7 @@ address p {
   overflow: hidden; }
   .main-wrapper .page-wrapper {
     min-height: 100vh;
-    background: #f9fafb;
+    background: #fbf6f0;
     width: calc(100% - 240px);
     margin-left: 240px;
     display: -webkit-flex;
@@ -20220,7 +20221,7 @@ address p {
   right: 0;
   left: 240px;
   z-index: 978;
-  box-shadow: 3px 0 10px 0 rgba(183, 192, 206, 0.2);
+  /* box-shadow: 3px 0 10px 0 rgba(183, 192, 206, 0.2); */
   transition: width .1s ease, left .1s ease; }
   @media (max-width: 991px) {
     .navbar {
@@ -20764,8 +20765,8 @@ address p {
     position: relative;
     border-right: 1px solid #f2f4f9;
     height: 100%;
-    -webkit-box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
-    box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
+    /* -webkit-box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
+    box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2); */
     background: #ffffff; }
     .sidebar .sidebar-body .nav {
       display: -webkit-flex;
@@ -22732,10 +22733,11 @@ address p {
 
 /* Cards */
 .card {
-  box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+  /* box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
   -webkit-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
   -moz-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
-  -ms-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2); }
+  -ms-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);  */
+}
   .card .card-body {
     padding: 1.5rem 1.5rem; }
     .card .card-body + .card-body {

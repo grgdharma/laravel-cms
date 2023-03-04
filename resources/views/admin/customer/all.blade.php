@@ -51,7 +51,7 @@
                                     <td>{{$value->provider}}</td>
                                     <td>
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->id}}" action="{{route('admin.dashboard.user.delete',$value->id)}}" method="POST" style="display:none">
+                                        <form id="delete-{{$value->id}}" action="{{route('system.user.delete',$value->id)}}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>

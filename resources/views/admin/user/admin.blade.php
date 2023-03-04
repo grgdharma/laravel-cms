@@ -38,7 +38,7 @@
                                     <td>
                                         <a href="javascript:void(0);" id="{{$value->id}}" data-toggle="modal" data-target="#editModal"  class="custom-btn edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        <form id="delete-{{$value->id}}" action="{{route('admin.dashboard.administration.delete',$value->id)}}" method="POST" style="display:none">
+                                        <form id="delete-{{$value->id}}" action="{{route('system.administration.delete',$value->id)}}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>
@@ -65,7 +65,7 @@
                 <h4 class="modal-title">Add</h4>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" method="POST" action="{{route('admin.dashboard.administration.store')}}">
+                <form autocomplete="off" method="POST" action="{{route('system.administration.store')}}">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" required>
@@ -111,7 +111,7 @@
     }
     $('#editModal').on('show.bs.modal', function(e) {
         var token = "{{csrf_token()}}";
-        var path = "{{route('admin.dashboard.administration.edit')}}";
+        var path = "{{route('system.administration.edit')}}";
         var $modal = $(this);
         var model_id = e.relatedTarget.id;
         $.ajax({

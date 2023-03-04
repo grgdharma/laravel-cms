@@ -9,12 +9,12 @@
 
 		<div class="card">
    			<div class="card-header">
-                <a href="{{route('admin.post.category')}}" class="header-tab "> Categories </a>
+                <a href="{{route('system.post.category')}}" class="header-tab "> Categories </a>
                 <a href="javascript:void(0);" class="header-tab active" > Add New </a>
                 @include('admin.includes.alert')
             </div>
             <div class="card-body">
-                <form autocomplete="off" method="post" action="{{route('admin.post.category.store')}}">
+                <form autocomplete="off" method="post" action="{{route('system.post.category.store')}}">
                     @csrf
                     <div class="row">
                         <div class="col-md-10">

@@ -1,5 +1,5 @@
 <div id="comment-section">
-    @if (count($post->comments)>0)
+    @if(isset($post->comments) && count($post->comments)>0)
         <h1>Display Comments</h1>
         @include('frontend.template.commentsDisplay', ['comments' => $post->comments, 'post_id' => $post->id])
     @endif

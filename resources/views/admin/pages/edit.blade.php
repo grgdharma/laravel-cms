@@ -7,13 +7,13 @@
     <div class="page-content">
 		<div class="card">
    			<div class="card-header">
-                <a href="{{route('admin.catalog.page')}}" class="header-tab "> Pages </a>
+                <a href="{{route('system.page')}}" class="header-tab "> Pages </a>
                 <a href="javascript:void(0);" class="header-tab active" > Edit </a>
                 @include('admin.includes.alert')
             </div>
             <div class="card-body">
                 
-                <form autocomplete="off" method="post" action="{{route('admin.catalog.page.update',$id)}}">
+                <form autocomplete="off" method="post" action="{{route('system.page.update',$id)}}">
                     @csrf
                     <div class="row">
                         <div class="col-md-9">

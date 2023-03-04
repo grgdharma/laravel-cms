@@ -17,9 +17,9 @@
 				    <button type="button" data-toggle="tooltip" id="button-folder" class="btn btn-default"><i class="fa fa-folder"></i></button>
 				    @endif
 					@if(getStorageDisk()!=='s3')
-					<button type="button" data-toggle="tooltip" id="button-parent" data-parent="/admin/filemanager" title="Back" class="btn btn-primary"><i class="fa fa-level-up"></i></button>
+					<button type="button" data-toggle="tooltip" id="button-parent" data-parent="/system/filemanager" title="Back" class="btn btn-primary"><i class="fa fa-level-up"></i></button>
 				    @endif
-					<a style="float: right;margin-bottom: 0;margin-right: 0;border-radius: 0;border-bottom: 0;" href="{{url('/admin/filemanager?directory='.$parent)}}" data-toggle="tooltip"  id="button-refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>    	    	
+					<a style="float: right;margin-bottom: 0;margin-right: 0;border-radius: 0;border-bottom: 0;" href="{{url('/system/filemanager?directory='.$parent)}}" data-toggle="tooltip"  id="button-refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>    	    	
 		      	</div>
 	    	</div>
 	    </div>
@@ -50,7 +50,7 @@
 				    @else 
 				    	<div class="col-sm-2 col-xs-6 text-center">
 				          	<div class="upload-img-items">
-					          	<a href="javascript:void(0);" data-directory="/admin/filemanager?directory={{$media_files['files'][$i]['name'] }}" class="directory">
+					          	<a href="javascript:void(0);" data-directory="/system/filemanager?directory={{$media_files['files'][$i]['name'] }}" class="directory">
 			                        <i class="fa fa-folder fa-5x"></i>
 					          	</a>
 					          	<label><input type="checkbox" name="path[]" value="{{ $media_files['files'][$i]['path'] }}" />{{ $media_files['files'][$i]['name'] }}</label>
@@ -116,7 +116,7 @@
 		var page = $(this).data('page');
 		var target_id = "{{$target_id}}";
 		var directory = "{{$parent}}";
-		var target_url = base_url+"/admin/filemanager?page="+encodeURIComponent(page)+"&target_id="+encodeURIComponent(target_id)+"&directory="+encodeURIComponent(directory);
+		var target_url = base_url+"/system/filemanager?page="+encodeURIComponent(page)+"&target_id="+encodeURIComponent(target_id)+"&directory="+encodeURIComponent(directory);
 		$('#filemanager').append('<div id="loader"></div>'); 
 		$('#modal-image').load(target_url);
 		
@@ -137,7 +137,7 @@
 			if ($('#form-upload input[name=\'file_name\']').val() != '') {
 				clearInterval(timer);
 				$.ajax({
-					url: "{{url('/admin/filemanager/upload')}}",
+					url: "{{url('/system/filemanager/upload')}}",
 					type: 'post',
 					dataType: 'json',
 					data: new FormData($('#form-upload')[0]),
@@ -185,7 +185,7 @@
 	        }
 
 			$.ajax({
-				url: "{{url('/admin/filemanager/delete')}}",
+				url: "{{url('/system/filemanager/delete')}}",
 				type: 'post',
 				dataType: 'json',
 				data: $('input[name^=\'path\']:checked'),
@@ -234,7 +234,7 @@
 			var directory= "{{$parent}}";
 			var folder = $('input[name=\'folder\']').val();
 			$.ajax({
-				url: "{{url('/admin/filemanager/folder/create')}}",
+				url: "{{url('/system/filemanager/folder/create')}}",
 				type: 'post',
 				dataType: 'json',
 				data: {directory:directory,folder:folder,_token:token},

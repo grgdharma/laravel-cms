@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\General;
+use App\Models\Post;
+use App\Models\PostComment;
 use App\Models\VisitorCount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,7 +32,9 @@ class DashboardController extends Controller
             $data['latitude']       = $location_info->latitude;
             $data['longitude']      = $location_info->longitude;
         }
-
+        $data['total_posts']     = Post::count();
+        $data['total_comments']  = PostComment::count();
+        $data['total_visitor']   = VisitorCount::select('key','key_value')->distinct()->count();
         return view('admin.dashboard',$data);
     }
 

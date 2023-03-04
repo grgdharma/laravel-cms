@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','System Permission')
+@section('title','System | Authorization')
 @section('content')
 
 @include('admin.includes.sidebar')
@@ -55,7 +55,7 @@
                                         <a class="custom-btn permission-update" data-id="{{$value['id']}}" href="javascript:void(0);" ><i class="fa fa-refresh" aria-hidden="true"></i></a> 
                                         <a class="custom-btn edit" href="javascript:void(0);" data-toggle="modal" data-target="#editModal" id="{{$value['id']}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
                                         <a class="custom-btn delete" href="javascript:void(0);" onclick="return checkDelete({{$value['id']}})" ><i class="fa fa-trash" aria-hidden="true"></i></a> 
-                                        <form id="delete-{{$value['id']}}" action="{{ route('admin.dashboard.permission.delete', $value['id']) }}" method="POST" style="display:none">
+                                        <form id="delete-{{$value['id']}}" action="{{ route('system.authorization.delete', $value['id']) }}" method="POST" style="display:none">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">
                                         </form>
@@ -86,7 +86,7 @@
                                             <a class="custom-btn permission-update" data-id="{{$child['id']}}" href="javascript:void(0);" ><i class="fa fa-refresh" aria-hidden="true"></i></a> 
                                             <a class="custom-btn edit" href="javascript:void(0);" data-toggle="modal" data-target="#editModal" id="{{$child['id']}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
                                             <a class="custom-btn delete" href="javascript:void(0);" onclick="return checkDelete({{$child['id']}})" ><i class="fa fa-trash" aria-hidden="true"></i></a> 
-                                            <form id="delete-{{$child['id']}}" action="{{ route('admin.dashboard.permission.delete', $child['id']) }}" method="POST" style="display:none">
+                                            <form id="delete-{{$child['id']}}" action="{{ route('system.authorization.delete', $child['id']) }}" method="POST" style="display:none">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
                                             </form>
@@ -117,7 +117,7 @@
                                             <a class="custom-btn permission-update" data-id="{{$child_list['id']}}" href="javascript:void(0);" ><i class="fa fa-refresh" aria-hidden="true"></i></a> 
                                             <a class="custom-btn edit" href="javascript:void(0);" data-toggle="modal" data-target="#editModal" id="{{$child_list['id']}}" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
                                             <a class="custom-btn delete" href="javascript:void(0);" onclick="return checkDelete({{$child_list['id']}})" ><i class="fa fa-trash" aria-hidden="true"></i></a> 
-                                            <form id="delete-{{$child_list['id']}}" action="{{ route('admin.dashboard.permission.delete', $child_list['id']) }}" method="POST" style="display:none">
+                                            <form id="delete-{{$child_list['id']}}" action="{{ route('system.authorization.delete', $child_list['id']) }}" method="POST" style="display:none">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
                                             </form>
@@ -153,7 +153,7 @@
                 <h4 class="modal-title">Add New</h4>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" method="POST" action="{{route('admin.dashboard.permission.store')}}">
+                <form autocomplete="off" method="POST" action="{{route('system.authorization.store')}}">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" required >
@@ -237,7 +237,7 @@
         });
         $(".permission-update").on("click",function(){
             var token = "{{csrf_token()}}";
-            var path = "{{route('admin.dashboard.permission.role.update')}}";
+            var path = "{{route('system.authorization.role.update')}}";
             var id = $(this).data("id");
             var val = [];
             $('#permission-'+id+' :checkbox:checked').each(function(i){
@@ -261,7 +261,7 @@
         });
         $('#editModal').on('show.bs.modal', function(e) {
             var token = "{{csrf_token()}}";
-            var path = "{{route('admin.dashboard.permission.edit')}}";
+            var path = "{{route('system.authorization.edit')}}";
             var $modal = $(this);
             var model_id = e.relatedTarget.id;
             $.ajax({
