@@ -24,17 +24,6 @@ class PostCommentController extends Controller
             return view('errors.401');
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -114,7 +103,7 @@ class PostCommentController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return redirect()->route('comments.list')->with('error',$e->getMessage());  
+            return redirect()->route('system.post.comments.list')->with('error',$e->getMessage());  
         }
     }
 }

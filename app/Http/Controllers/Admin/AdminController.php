@@ -22,7 +22,12 @@ class AdminController extends Controller
     {
         if(checkAuthorization() == true){
             $data['role'] = AdminRole::where('id','!=',1)->get();
-            $data['admin'] = Admin::orderBy('name','ASC')->get();
+            $admin_group = Auth::guard('admin')->user()->role_id;
+            if($admin_group == 1){
+                $data['admin'] = Admin::orderBy('name','ASC')->get();
+            }else{
+                $data['admin'] = Admin::where('role_id','!=',1)->orderBy('name','ASC')->get();
+            }
             return view('admin.user.admin',$data);
         }else{
             return view('errors.401');
@@ -50,7 +55,7 @@ class AdminController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return back()->with('error',$e->getMessage());   
+            return redirect()->route('system.administration')->with('error',$e->getMessage());  
         }
     }
 
@@ -107,7 +112,7 @@ class AdminController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return back()->with('error',$e->getMessage());   
+            return redirect()->route('system.administration')->with('error',$e->getMessage());  
         }
     }
 
@@ -126,7 +131,7 @@ class AdminController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return back()->with('error',$e->getMessage());   
+            return redirect()->route('system.administration')->with('error',$e->getMessage());  
         }
     }
 }

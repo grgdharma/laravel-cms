@@ -97,7 +97,7 @@ class PostCategoryController extends Controller
                 $data['edit'] = $category;
                 return view('admin.category.edit',$data);
             }else{
-                return redirect()->route('admin.post.category')->with('error','Sorry, data not found.');   
+                return redirect()->route('system.post.category')->with('error','Sorry, data not found.');   
             }
         }else{
             return view('errors.401');

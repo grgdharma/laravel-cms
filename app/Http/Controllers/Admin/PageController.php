@@ -83,7 +83,7 @@ class PageController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return back()->with('error',$e->getMessage());   
+            return redirect()->route('system.page')->with('error',$e->getMessage());   
         }
     }
     /**
@@ -102,7 +102,7 @@ class PageController extends Controller
                 $data['page_lists'] = Pages::whereNull('parent_id')->get();
                 return view('admin.pages.edit',$data);
             }else{
-                return back()->with('error','Sorry, data not found.');   
+                return redirect()->route('system.page')->with('error','Sorry, data not found.');  
             }
         }else{
             return view('errors.401');
@@ -127,7 +127,7 @@ class PageController extends Controller
                 return back()->with('error','Sorry, something is wrong');   
             }
         }catch(\Exception $e){
-            return back()->with('error',$e->getMessage());  
+            return redirect()->route('system.page')->with('error',$e->getMessage()); 
         }
     }
 
@@ -147,7 +147,7 @@ class PageController extends Controller
                 return back()->with('error','Sorry, something is wrong.');   
             }
         }catch(\Exception $e){
-            return redirect()->route('admin.catalog.page')->with('error',$e->getMessage());  
+            return redirect()->route('system.page')->with('error',$e->getMessage()); 
         }
     }
 }
