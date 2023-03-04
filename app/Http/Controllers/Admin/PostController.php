@@ -107,7 +107,7 @@ class PostController extends Controller
                 $data['category'] = PostCategory::where('status',1)->get();
                 return view('admin.post.edit',$data);
             }else{
-                return redirect()->route('admin.post')->with('error','Sorry, data not found.');   
+                return redirect()->route('system.post')->with('error','Sorry, data not found.');   
             }
         }else{
             return view('errors.401');
