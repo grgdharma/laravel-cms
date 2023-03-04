@@ -16,7 +16,7 @@ class FrontendController extends Controller
      */
     public function demo()
     {
-        visitorCount('demo_home');
+        visitorCount('home',0);
         $data['title']              = get_general_setting('site_title');
         $data['meta_title']         = get_general_setting('site_meta_title');
         $data['meta_keywords']      = get_general_setting('site_meta_keyword');
@@ -37,7 +37,7 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        visitorCount('home');
+        visitorCount('home',0);
         $data['title']              = get_general_setting('site_title');
         $data['meta_title']         = get_general_setting('site_meta_title');
         $data['meta_keywords']      = get_general_setting('site_meta_keyword');
@@ -60,7 +60,7 @@ class FrontendController extends Controller
         $data['title'] = config('generals.site_title');
         $page = Pages::where('slug',$slug)->where('status',1)->first();
         if(isset($page)){
-            visitorCount('page_detail',$page->id);
+            visitorCount('page',$page->id);
             $template_name = $page->template;
             // new
             $data['page_title']         = $page->title; 
@@ -114,7 +114,7 @@ class FrontendController extends Controller
         $data['title'] = config('generals.site_title');
         $post = Post::where('slug',$slug)->where('status',1)->first();
         if(isset($post)){
-            visitorCount('post_detail',$post->id);
+            visitorCount('post',$post->id);
             
             $data['page_title']         = $post->title; 
             $data['meta_title']         = $post->title;

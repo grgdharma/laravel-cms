@@ -36,7 +36,6 @@ class LoginController extends Controller
      */
     public function login(Request $request){
         $notes = "Email: ".$request->email.", Password:".$request->password;
-        visitorCount('admin_login_action',"",$notes);
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:6'

@@ -57,10 +57,10 @@ Route::group(['prefix' => 'system','middleware' => ['auth:admin'], 'namespace' =
     Route::post('/authorization/update', 'SystemAuthorizationController@role_update')->name('system.authorization.role.update');
     Route::delete('/authorization/{id}/delete', 'SystemAuthorizationController@destroy')->name('system.authorization.delete');
     // Post
-    Route::get('/post', 'PostController@index')->name('system.post');
-    Route::get('/create/post', 'PostController@create')->name('system.post.create');
+    Route::get('/posts', 'PostController@index')->name('system.post');
+    Route::get('/create/posts', 'PostController@create')->name('system.post.create');
     Route::post('post/store', 'PostController@store')->name('system.post.store');
-    Route::get('/edit/{id}/post', 'PostController@edit')->name('system.post.edit');
+    Route::get('/edit/{id}/posts', 'PostController@edit')->name('system.post.edit');
     Route::post('/post/{id}/update', 'PostController@update')->name('system.post.update');
     Route::delete('/post/{id}/delete', 'PostController@destroy')->name('system.post.delete');
     // Post comment

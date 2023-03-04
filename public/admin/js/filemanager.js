@@ -25,7 +25,7 @@ $(document).on("click",".button-image",function(e){
     var $icon   = $button.find('> i');  
     $('#modal-image').remove();
     $.ajax({
-        url: "/admin/filemanager",
+        url: "/system/filemanager",
         data:{target_id:target_id},
         dataType: 'html',
         beforeSend: function() {

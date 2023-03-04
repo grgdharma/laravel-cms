@@ -107,7 +107,7 @@ class SystemAuthorizationTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Posts',
-                'route_url' => 'system/post',
+                'route_url' => 'system/posts',
                 'route_name'=> 'system.post',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
@@ -117,7 +117,7 @@ class SystemAuthorizationTableSeeder extends Seeder
             [
                 'parent_id' => 11,
                 'name'      => 'Create Post',
-                'route_url' => 'system/create/post',
+                'route_url' => 'system/create/posts',
                 'route_name'=> 'system.post.create',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
@@ -127,7 +127,7 @@ class SystemAuthorizationTableSeeder extends Seeder
             [
                 'parent_id' => 11,
                 'name'      => 'Edit Post',
-                'route_url' => 'system/edit/{id}/post',
+                'route_url' => 'system/edit/{id}/posts',
                 'route_name'=> 'system.post.edit',
                 'role_id'   => json_encode(['1']),
                 'status'    => 1,
