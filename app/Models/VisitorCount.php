@@ -13,6 +13,6 @@ class VisitorCount extends Model
      *
      * @var array
      */
-    protected $fillable = ['key','key_value','ip_address','referrer','user_agent','notes','visited_date','visited_time'];
+    protected $fillable = ['key','key_value','ip_address','referrer','user_agent','notes','visited_date','visited_time','visited_day','visited_month','visited_year'];
 
 }

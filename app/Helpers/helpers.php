@@ -168,6 +168,9 @@ if(!function_exists('visitorCount')){
                 'ip_address'   => $ip_address,
                 'visited_date' => date('Y-m-d'),
                 'visited_time' => date('H:i'),
+                'visited_day'  => date('D'),
+                'visited_month'=> date('M'),
+                'visited_year' => date('Y')
             ];
             $result = VisitorCount:: firstOrCreate($data);
             $result->referrer   = $referrer;
@@ -175,6 +178,24 @@ if(!function_exists('visitorCount')){
             $result->notes      = $notes;
             $result->save();
         }
+    }
+}
+if(!function_exists('dailyCount')){
+    function dailyCount(){
+        $daily_visitor  = VisitorCount::select('ip_address','visited_date','visited_day')->distinct()->get();
+        $daily_count    = [];
+        foreach($daily_visitor as $daily){
+            $daily_count =  [
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Sun')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Mon')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Tue')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Wed')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Thu')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Fri')->count(),
+                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Sat')->count()
+            ];
+        }
+        return $daily_count;
     }
 }
 if(!function_exists('getIPAddress')){

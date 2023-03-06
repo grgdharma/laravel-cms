@@ -35,6 +35,7 @@ class DashboardController extends Controller
         $data['total_posts']     = Post::count();
         $data['total_comments']  = PostComment::count();
         $data['total_visitor']   = VisitorCount::select('key','key_value')->distinct()->count();
+        $data['daily_count']     = dailyCount();
         return view('admin.dashboard',$data);
     }
 
