@@ -23,6 +23,9 @@ return new class extends Migration
             $table->mediumText('notes')->nullable();
             $table->string('visited_date');
             $table->string('visited_time');
+            $table->string('visited_day');
+            $table->string('visited_month');
+            $table->string('visited_year');
             $table->timestamps();
             $table->index(['key','key_value','ip_address']);
         });

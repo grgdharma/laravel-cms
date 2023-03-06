@@ -17,6 +17,7 @@
     <link href="{{ url('admin/css/core.css') }}" rel="stylesheet">
     <link href="{{ url('admin/css/style.css') }}" rel="stylesheet" >
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
     <div class="main-wrapper">
