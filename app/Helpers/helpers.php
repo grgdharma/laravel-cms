@@ -183,19 +183,41 @@ if(!function_exists('visitorCount')){
 if(!function_exists('dailyCount')){
     function dailyCount(){
         $daily_visitor  = VisitorCount::select('ip_address','visited_date','visited_day')->distinct()->get();
-        $daily_count    = [];
+        
+        $sun    = 0;
+        $mon    = 0;
+        $tue    = 0;
+        $wed    = 0;
+        $thu    = 0;
+        $fri    = 0;
+        $sat    = 0;
+        $count  = [];
         foreach($daily_visitor as $daily){
-            $daily_count =  [
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Sun')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Mon')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Tue')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Wed')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Thu')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Fri')->count(),
-                VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', 'Sat')->count()
-            ];
+            $daily_count = VisitorCount::where('ip_address', $daily->ip_address)->where('visited_date', $daily->visited_date)->where('visited_day', $daily->visited_day)->count();
+            if($daily->visited_day == 'Sun'){
+                $sun = $daily_count;
+            }
+            if($daily->visited_day == 'Mon'){
+                $mon = $daily_count;
+            }
+            if($daily->visited_day == 'Tue'){
+                $tue = $daily_count;
+            }
+            if($daily->visited_day == 'Wed'){
+                $wed = $daily_count;
+            }
+            if($daily->visited_day == 'Thu'){
+                $thu = $daily_count;
+            }
+            if($daily->visited_day == 'Fri'){
+                $fri = $daily_count;
+            }
+            if($daily->visited_day == 'Sat'){
+                $sat = $daily_count;
+            }
         }
-        return $daily_count;
+        $count =  [$sun,$mon,$tue,$wed,$thu,$fri,$sat];
+        return $count;
     }
 }
 if(!function_exists('getIPAddress')){
