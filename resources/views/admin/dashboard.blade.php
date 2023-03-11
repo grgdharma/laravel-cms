@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col-xl-4 ">
-                <div class="white_card card_height_100 mb_30 social_media_card">
+                <div class="white_card mb_30 social_media_card">
                     <div class="white_card_header">
                         <div class="main-title">
                             <h3 class="m-0">Catelog</h3>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col-xl-4 ">
-                <div class="white_card card_height_100 mb_30">
+                <div class="white_card mb_30">
                     <div class="white_card_header">
                         <div class="box_header m-0">
                             <div class="main-title">
