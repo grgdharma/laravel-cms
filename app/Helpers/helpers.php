@@ -181,8 +181,8 @@ if(!function_exists('visitorCount')){
     }
 }
 if(!function_exists('dailyCount')){
-    function dailyCount(){
-        $daily_visitor  = VisitorCount::select('ip_address','visited_date','visited_day')->distinct()->get();
+    function dailyCount($start_day,$end_day){
+        $daily_visitor  = VisitorCount::whereBetween('visited_date',[$start_day,$end_day])->select('ip_address','visited_date','visited_day')->distinct()->get();
         
         $sun    = 0;
         $mon    = 0;
