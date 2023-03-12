@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\General;
 use App\Models\Post;
 use App\Models\PostComment;
@@ -35,7 +36,13 @@ class DashboardController extends Controller
         $data['total_posts']     = Post::count();
         $data['total_comments']  = PostComment::count();
         $data['total_visitor']   = VisitorCount::select('key','key_value')->distinct()->count();
-        $data['daily_count']     = dailyCount();
+
+        //$now = Carbon::now()->subDays(7);
+        $now = Carbon::now();
+        $start_day = $now->startOfWeek(Carbon::SUNDAY)->format('Y-m-d');
+        $end_day   = $now->endOfWeek(Carbon::SATURDAY)->format('Y-m-d');
+        $data['daily_count']     = dailyCount($start_day,$end_day);
+
         return view('admin.dashboard',$data);
     }
 
