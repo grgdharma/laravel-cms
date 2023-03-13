@@ -24,14 +24,14 @@ class SystemAuthorizationTableSeeder extends Seeder
             [
                 'name'      => 'System User',
                 'route_url' => '',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
             ],
             [
                 'name'      => 'Catelog',
                 'route_url' => '',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 4,
             ],
@@ -50,7 +50,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'General',
                 'route_url' => 'system/general',
                 'route_name'=> 'system.general',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'icon'      => 'settings'
             ],
@@ -59,7 +59,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Administration',
                 'route_url' => 'system/administration',
                 'route_name'=> 'system.administration',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'user'
@@ -69,7 +69,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Users',
                 'route_url' => 'system/user',
                 'route_name'=> 'system.user',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'users'
@@ -79,7 +79,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Pages',
                 'route_url' => 'system/page',
                 'route_name'=> 'system.page',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'book'
@@ -89,7 +89,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Create Page',
                 'route_url' => 'system/create/page',
                 'route_name'=> 'system.page.create',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'book'
@@ -99,7 +99,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Update Page',
                 'route_url' => 'system/edit/{id}/page',
                 'route_name'=> 'system.page.edit',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'book'
@@ -109,7 +109,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Posts',
                 'route_url' => 'system/posts',
                 'route_name'=> 'system.post',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'book-open'
@@ -119,7 +119,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Create Post',
                 'route_url' => 'system/create/posts',
                 'route_name'=> 'system.post.create',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => ''
@@ -129,7 +129,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Edit Post',
                 'route_url' => 'system/edit/{id}/posts',
                 'route_name'=> 'system.post.edit',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => ''
@@ -139,7 +139,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Categories',
                 'route_url' => 'system/post/category',
                 'route_name'=> 'system.post.category',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => 'box'
@@ -149,7 +149,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Create',
                 'route_url' => 'system/post/create/category',
                 'route_name'=> 'system.post.category.create',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => ''
@@ -159,7 +159,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Edit',
                 'route_url' => 'system/post/edit/{id}/category',
                 'route_name'=> 'system.post.category.edit',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 2,
                 'icon'      => ''
@@ -169,7 +169,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Comments',
                 'route_url' => 'system/post/comment',
                 'route_name'=> 'system.post.comments.list',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 3,
                 'icon'      => 'message-circle'
@@ -179,7 +179,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'name'      => 'Comment Details',
                 'route_url' => 'system/post/detail/{id}/comment',
                 'route_name'=> 'system.post.comments.show',
-                'role_id'   => json_encode(['1']),
+                'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
                 'sort_order'=> 0,
                 'icon'      => 'arrow-right'
