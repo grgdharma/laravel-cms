@@ -280,3 +280,13 @@ if(!function_exists('getNavMenu')){
         return $data;
     }
 }
+if (! function_exists('currencyFormat')) {
+    function currencyFormat($value){
+        $code = '$';
+        if (is_numeric($value)) {
+            return $code.''.number_format($value);
+        }else{
+            return $code.''. str_replace('.00', '', $value);
+        }
+    }
+}
