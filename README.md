@@ -27,16 +27,16 @@ Follow the steps below to set up the project on your local environment.
 git clone <repository-url>
 cd <project-folder>
 
-### 🗄️ Create the Database
+## 2 🗄️ Create the Database
 Create a new MySQL database:
 ```bash
 laravel-cms
 
-### 3. Install Composer Dependencies
+## 3. Install Composer Dependencies
 ```bash
 composer install
 
-### 4. Environment Configuration
-### 5. Clear Cache & Optimize
-### 6. Run Migrations
-### 7. Start the Development Server
+## 4. Environment Configuration
+## 5. Clear Cache & Optimize
+## 6. Run Migrations
+## 7. Start the Development Server
