@@ -9,10 +9,9 @@ This guide provides complete installation steps to run the project locally.
 
 Ensure your system meets the following versions:
 
-- **PHP:** 8.1.17  
-- **Node.js:** v14.17.3  
+- **Minimum PHP version:** 8.1
 - **Composer:** Latest version  
-- **MySQL:** 5.7+ / MariaDB
+- **MySQL:** 5.7+ 
 
 ---
 
