@@ -27,9 +27,18 @@ Follow the steps below to set up the project on your local environment.
 git clone <repository-url>
 cd <project-folder>
 
----
+# Project Setup
 
-### 1. Clone the Repository
+This guide will help you set up the project locally.
+
+## Server Configuration
+
+- **PHP Version:** 8.1.17  
+- **Node Version:** v14.17.3  
+
+## Clone Repository
+
 ```bash
 git clone <repository-url>
-cd <project-folder>
+cd <repository-folder>
+
