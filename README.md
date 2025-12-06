@@ -3,6 +3,8 @@
 A Laravel-based Content Management System (CMS) built specifically for blogging, designed to help manage blog posts, categories, and more.
 This guide provides complete installation steps to run the project locally.
 
+<img width="2439" height="1332" alt="image" src="https://github.com/user-attachments/assets/190b33ab-50cf-4ec6-99dd-ffe2e6461a1b" />
+
 ---
 
 ## 🛠 Server Requirements
