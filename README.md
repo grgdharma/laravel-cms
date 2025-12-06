@@ -26,3 +26,10 @@ Follow the steps below to set up the project on your local environment.
 ```bash
 git clone <repository-url>
 cd <project-folder>
+
+---
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd <project-folder>
