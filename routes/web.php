@@ -1,33 +1,45 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Social Login
-Route::get('oauth/{driver}', 'Auth\LoginController@redirectToProvider')->name('social.oauth');
-Route::get('oauth/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
+Route::view('/', 'welcome');
 
-/**
- * Frontend OR User Routing
- */
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Auth::routes();
+
+/*
+|--------------------------------------------------------------------------
+| Social Login Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('oauth')->group(function () {
+    Route::get('{driver}', [LoginController::class, 'redirectToProvider'])->name('social.oauth');
+    Route::get('{driver}/callback', [LoginController::class, 'handleProviderCallback'])->name('social.callback');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Frontend / User Routes
+|--------------------------------------------------------------------------
+*/
 require __DIR__ . '/frontend/index.php';
 require __DIR__ . '/frontend/user.php';
-/**
- * Backend OR Admin Routing
- */
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 require __DIR__ . '/admin.php';
