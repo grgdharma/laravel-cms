@@ -1,81 +1,143 @@
-<?php 
+<?php
 
-Route::group(['prefix' => 'admin','namespace' => 'Auth\Admin'], function () {
-    
-	Route::get('/login', 'LoginController@showLogin')->name('admin.login');
-	Route::post('/login', 'LoginController@login')->name('admin.login.submit');
+use Illuminate\Support\Facades\Route;
 
-	Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-    Route::get('/password/reset/{token}/{email}', 'ResetPasswordController@showResetForm')->name('admin.password.reset');
-    Route::post('/password/update', 'ResetPasswordController@reset')->name('admin.password.update');
+/*
+|--------------------------------------------------------------------------
+| Admin Auth Controllers
+|--------------------------------------------------------------------------
+*/
+use App\Http\Controllers\Auth\Admin\LoginController;
+use App\Http\Controllers\Auth\Admin\ForgotPasswordController;
+use App\Http\Controllers\Auth\Admin\ResetPasswordController;
 
+/*
+|--------------------------------------------------------------------------
+| System Controllers
+|--------------------------------------------------------------------------
+*/
+use App\Http\Controllers\Admin\{
+    DashboardController,
+    GeneralController,
+    AdminController,
+    PageController,
+    FileManagerController,
+    UserController,
+    SystemAuthorizationController,
+    PostController,
+    PostCommentController,
+    PostCategoryController,
+    VisitorInfoController
+};
+
+/*
+|--------------------------------------------------------------------------
+| Admin Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->group(function () {
+
+    Route::get('/login', [LoginController::class, 'showLogin'])->name('admin.login');
+    Route::post('/login', [LoginController::class, 'login'])->name('admin.login.submit');
+
+    Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.password.request');
+    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('admin.password.email');
+    Route::get('/password/reset/{token}/{email}', [ResetPasswordController::class, 'showResetForm'])->name('admin.password.reset');
+    Route::post('/password/update', [ResetPasswordController::class, 'reset'])->name('admin.password.update');
 });
 
-Route::group(['prefix' => 'admin','middleware' => ['auth:admin'], 'namespace' => 'Auth\Admin'], function () {
-    Route::post('/logout', 'LoginController@logout')->name('admin.logout');
+/*
+|--------------------------------------------------------------------------
+| Admin Logout (Protected)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
 });
 
-Route::group(['prefix' => 'system','middleware' => ['auth:admin'], 'namespace' => 'Admin'], function () {
+/*
+|--------------------------------------------------------------------------
+| System / Admin Panel Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('system')->middleware('auth:admin')->group(function () {
 
-    Route::get('/dashboard', 'DashboardController@index')->name('system.dashboard');
-    Route::post('/site/status', 'DashboardController@site_status')->name('site.status');
-    // General
-    Route::get('/general', 'GeneralController@index')->name('system.general');
-    Route::post('/general/update', 'GeneralController@update')->name('system.general.update');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('system.dashboard');
+    Route::post('/site/status', [DashboardController::class, 'site_status'])->name('site.status');
+    // General Settings
+    Route::get('/general', [GeneralController::class, 'index'])->name('system.general');
+    Route::post('/general/update', [GeneralController::class, 'update'])->name('system.general.update');
+    // File Manager
+    Route::get('/filemanager', [FileManagerController::class, 'index'])->name('filemanager');
+    Route::post('/filemanager/upload', [FileManagerController::class, 'upload_file'])->name('file.upload');
+    Route::post('/filemanager/folder/create', [FileManagerController::class, 'create_folder'])->name('create.folder');
+    Route::post('/filemanager/delete', [FileManagerController::class, 'delete'])->name('delete.file.folder');
 
-    // Admin Manager
-    Route::get('/administration', 'AdminController@index')->name('system.administration');
-    Route::post('/administration/store', 'AdminController@store')->name('system.administration.store');
-    Route::post('/administration/edit', 'AdminController@edit')->name('system.administration.edit');
-    Route::post('/administration/{id}/update', 'AdminController@update')->name('system.administration.update');
-    Route::delete('/administration/{id}/delete', 'AdminController@destroy')->name('system.administration.delete');
+    // Admin Management
+    Route::resource('administration', AdminController::class)->names([
+        'index'   => 'system.administration',
+        'store'   => 'system.administration.store',
+        'update'  => 'system.administration.update',
+        'destroy' => 'system.administration.delete',
+    ])->except(['show', 'create']);
+    Route::post('administration/edit', [AdminController::class, 'edit'])->name('system.administration.edit');
 
-    // Pages
-    Route::get('/page', 'PageController@index')->name('system.page');
-    Route::get('/create/page', 'PageController@create')->name('system.page.create');
-    Route::post('/page/store', 'PageController@store')->name('system.page.store');
-    Route::get('/edit/{id}/page', 'PageController@edit')->name('system.page.edit');
-    Route::post('/page/{id}/update', 'PageController@update')->name('system.page.update');
-    Route::delete('/page/{id}/delete', 'PageController@destroy')->name('system.page.delete');
-
-    // File manager
-    Route::get('/filemanager', 'FileManagerController@index')->name('filemanager');
-    Route::post('/filemanager/upload', 'FileManagerController@upload_file')->name('file.upload');
-    Route::post('/filemanager/folder/create', 'FileManagerController@create_folder')->name('create.folder');
-    Route::post('/filemanager/delete', 'FileManagerController@delete')->name('delete.file.folder');
 
     // Users
-    Route::get('/user', 'UserController@index')->name('system.user');
-    Route::delete('/user/{id}/delete', 'UserController@destroy')->name('system.user.delete');
+    Route::resource('user', UserController::class)->only(['index', 'destroy'])->names([
+        'index'   => 'system.user',
+        'destroy' => 'system.user.delete',
+    ]);
 
-    // System Authorization
-    Route::get('/authorization', 'SystemAuthorizationController@index')->name('system.authorization');
-    Route::post('/authorization/store', 'SystemAuthorizationController@store')->name('system.authorization.store');
-    Route::post('/authorization/edit', 'SystemAuthorizationController@edit')->name('system.authorization.edit');
-    Route::post('/authorization/{id}/update', 'SystemAuthorizationController@update')->name('system.authorization.update');
-    Route::post('/authorization/update', 'SystemAuthorizationController@role_update')->name('system.authorization.role.update');
-    Route::delete('/authorization/{id}/delete', 'SystemAuthorizationController@destroy')->name('system.authorization.delete');
+    // Pages
+    Route::resource('page', PageController::class)->names([
+        'index'   => 'system.page',
+        'create'  => 'system.page.create',
+        'store'   => 'system.page.store',
+        'edit'    => 'system.page.edit',
+        'update'  => 'system.page.update',
+        'destroy' => 'system.page.delete',
+    ])->except(['show']);
+
+    // Authorization
+    Route::resource('authorization', SystemAuthorizationController::class)->names([
+        'index'   => 'system.authorization',
+        'store'   => 'system.authorization.store',
+        'update'  => 'system.authorization.update',
+        'destroy' => 'system.authorization.delete',
+    ])->except(['create', 'show', 'edit']);
+    Route::post('authorization/edit',[SystemAuthorizationController::class, 'edit'])->name('system.authorization.edit');
+    Route::post('authorization/update-role',[SystemAuthorizationController::class, 'role_update'])->name('system.authorization.role.update');
+    
     // Post
-    Route::get('/posts', 'PostController@index')->name('system.post');
-    Route::get('/create/posts', 'PostController@create')->name('system.post.create');
-    Route::post('post/store', 'PostController@store')->name('system.post.store');
-    Route::get('/edit/{id}/posts', 'PostController@edit')->name('system.post.edit');
-    Route::post('/post/{id}/update', 'PostController@update')->name('system.post.update');
-    Route::delete('/post/{id}/delete', 'PostController@destroy')->name('system.post.delete');
-    // Post comment
-    Route::get('/post/comment', 'PostCommentController@index')->name('system.post.comments.list');
-    Route::get('/post/detail/{id}/comment', 'PostCommentController@show')->name('system.post.comments.show');
-    Route::post('/post/comment/store', 'PostCommentController@store')->name('system.post.comment.store');
-    Route::delete('/post/comment/{id}/delete', 'PostCommentController@destroy')->name('system.post.comment.delete');
+    Route::resource('post', PostController::class)->names([
+        'index'   => 'system.post',
+        'create'  => 'system.post.create',
+        'store'   => 'system.post.store',
+        'edit'    => 'system.post.edit',
+        'update'  => 'system.post.update',
+        'destroy' => 'system.post.delete',
+    ])->except(['show']);
 
     // Categories
-    Route::get('/post/category', 'PostCategoryController@index')->name('system.post.category');
-    Route::get('/post/create/category', 'PostCategoryController@create')->name('system.post.category.create');
-    Route::post('/post/category/store', 'PostCategoryController@store')->name('system.post.category.store');
-    Route::get('/post/edit/{id}/category', 'PostCategoryController@edit')->name('system.post.category.edit');
-    Route::post('/post/category/{id}/update', 'PostCategoryController@update')->name('system.post.category.update');
-    Route::delete('/post/category/{id}/delete', 'PostCategoryController@destroy')->name('system.post.category.delete');
+    Route::resource('post/category', PostCategoryController::class)->names([
+        'index'  => 'system.post.category',
+        'create'  => 'system.post.category.create',
+        'store'   => 'system.post.category.store',
+        'edit'    => 'system.post.category.edit',
+        'update'  => 'system.post.category.update',
+        'destroy' => 'system.post.category.delete',
+    ])->except(['show']);
+
+    // Post Comments
+    Route::resource('post/comment', PostCommentController::class)->only(['index', 'store', 'destroy'])->names([
+        'index'   => 'system.post.comments.list',
+        'store'   => 'system.post.comment.store',
+        'destroy' => 'system.post.comment.delete',
+    ]);           
+    Route::get('post/{id}/comment',[PostCommentController::class, 'show'])->name('system.post.comments.show');
+
     // Visitor information
-    Route::get('/visitor-info/{type}', 'VisitorInfoController@index')->name('system.visitor.info');
+    Route::get('/visitor-info/{type}', [VisitorInfoController::class, 'index'])->name('system.visitor.info');
 });
