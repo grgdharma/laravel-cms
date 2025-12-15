@@ -54,7 +54,7 @@ Follow the steps below to set up the project on your local environment.
 ### 9. Access Admin Panel
 - http://localhost/admin/login
 - Default Login Credentials
-- Email: laravel-cms@gmail.com
+- Email: gurungdrg30@gmail.com
 - Password: laravel-cms@2022
 
 
