@@ -17,7 +17,7 @@ class AdminTableSeeder extends Seeder
             [
                 'name' => 'Dharma Gurung',
                 'email' => 'gurungdrg30@gmail.com',
-                'password' => bcrypt('BestAdmin@2022'),
+                'password' => bcrypt('laravel-cms@2022'),
                 'role_id' => 1,
                 'status' => 1
             ]

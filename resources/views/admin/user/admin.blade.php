@@ -40,7 +40,7 @@
                                         <a href="javascript:void(0);" class="custom-btn delete" onclick="return checkDelete({{$value->id}})"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         <form id="delete-{{$value->id}}" action="{{route('system.administration.delete',$value->id)}}" method="POST" style="display:none">
                                             @csrf
-                                            <input type="hidden" name="_method" value="delete">
+                                            @method('DELETE')
                                         </form>
                                     </td>
                                     @else
@@ -68,26 +68,35 @@
                 <form autocomplete="off" method="POST" action="{{route('system.administration.store')}}">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Name" >
                         @error('name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" required>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" >
+                        @error('email')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <select class="form-control @error('role') is-invalid @enderror" name="role" required>
+                        <select class="form-control @error('role') is-invalid @enderror" name="role" >
                             <option value="">Role</option>
                             @foreach($role as $value)
                             <option value="{{$value->id}}">{{$value->name}}</option>
                             @endforeach
                         </select>
+                        @error('role')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Password" required>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Password" >
+                        @error('password')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-default">{{ __('Submit') }}</button>
+                    <button type="submit" class="btn btn-default"> Submit </button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
             </div>

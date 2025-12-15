@@ -16,6 +16,7 @@
             <div class="card-body">
                 <form autocomplete="off" method="post" action="{{route('system.post.category.update',$edit->id)}}">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-10">
                             <div class="row">

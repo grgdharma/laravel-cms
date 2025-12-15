@@ -86,8 +86,8 @@ class SystemAuthorizationTableSeeder extends Seeder
             ],
             [
                 'parent_id' => 8,
-                'name'      => 'Create Page',
-                'route_url' => 'system/create/page',
+                'name'      => 'Create',
+                'route_url' => 'system/page/create',
                 'route_name'=> 'system.page.create',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -96,8 +96,18 @@ class SystemAuthorizationTableSeeder extends Seeder
             ],
             [
                 'parent_id' => 8,
-                'name'      => 'Update Page',
-                'route_url' => 'system/edit/{id}/page',
+                'name'      => 'Edit',
+                'route_url' => 'system/page/{page}/edit',
+                'route_name'=> 'system.page.edit',
+                'role_id'   => json_encode(["1","2"]),
+                'status'    => 1,
+                'sort_order'=> 2,
+                'icon'      => 'book'
+            ],
+            [
+                'parent_id' => 8,
+                'name'      => 'Update',
+                'route_url' => 'system/page/{page}',
                 'route_name'=> 'system.page.edit',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -107,7 +117,7 @@ class SystemAuthorizationTableSeeder extends Seeder
             [
                 'parent_id' => 3,
                 'name'      => 'Posts',
-                'route_url' => 'system/posts',
+                'route_url' => 'system/post',
                 'route_name'=> 'system.post',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -115,9 +125,9 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'icon'      => 'book-open'
             ],
             [
-                'parent_id' => 11,
-                'name'      => 'Create Post',
-                'route_url' => 'system/create/posts',
+                'parent_id' => 12,
+                'name'      => 'Create',
+                'route_url' => 'system/post/create',
                 'route_name'=> 'system.post.create',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -125,9 +135,19 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'icon'      => ''
             ],
             [
-                'parent_id' => 11,
-                'name'      => 'Edit Post',
-                'route_url' => 'system/edit/{id}/posts',
+                'parent_id' => 12,
+                'name'      => 'Edit',
+                'route_url' => 'system/post/{post}/edit',
+                'route_name'=> 'system.post.edit',
+                'role_id'   => json_encode(["1","2"]),
+                'status'    => 1,
+                'sort_order'=> 2,
+                'icon'      => ''
+            ],
+            [
+                'parent_id' => 12,
+                'name'      => 'Update',
+                'route_url' => 'system/post/{post}',
                 'route_name'=> 'system.post.edit',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -145,9 +165,9 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'icon'      => 'box'
             ],
             [
-                'parent_id' => 14,
+                'parent_id' => 16,
                 'name'      => 'Create',
-                'route_url' => 'system/post/create/category',
+                'route_url' => 'system/post/category/create',
                 'route_name'=> 'system.post.category.create',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -155,9 +175,19 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'icon'      => ''
             ],
             [
-                'parent_id' => 14,
+                'parent_id' => 16,
                 'name'      => 'Edit',
-                'route_url' => 'system/post/edit/{id}/category',
+                'route_url' => 'system/post/category/{category}/edit',
+                'route_name'=> 'system.post.category.edit',
+                'role_id'   => json_encode(["1","2"]),
+                'status'    => 1,
+                'sort_order'=> 2,
+                'icon'      => ''
+            ],
+            [
+                'parent_id' => 16,
+                'name'      => 'Update',
+                'route_url' => 'system/post/category/{category}',
                 'route_name'=> 'system.post.category.edit',
                 'role_id'   => json_encode(["1","2"]),
                 'status'    => 1,
@@ -175,7 +205,7 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'icon'      => 'message-circle'
             ],
             [
-                'parent_id' => 17,
+                'parent_id' => 20,
                 'name'      => 'Comment Details',
                 'route_url' => 'system/post/detail/{id}/comment',
                 'route_name'=> 'system.post.comments.show',

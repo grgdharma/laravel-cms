@@ -27,9 +27,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(count($category) > 0)
+                            @if(count($categories) > 0)
                             @php $i=1 ; @endphp
-                                @foreach($category as $value)
+                                @foreach($categories as $value)
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td> {!! $value->title !!}</td>

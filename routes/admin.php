@@ -60,7 +60,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 | System / Admin Panel Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('system')->middleware('auth:admin')->group(function () {
+Route::group(['prefix' => 'system', 'middleware' => ['auth:admin']], function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('system.dashboard');

@@ -103,7 +103,6 @@ if (! function_exists('getRouteLists')) {
             if($first_data[0]=='system' && !in_array($value->methods()[0],['POST','DELETE']) && !in_array($route_name,$exclude_name) ){
                 echo "<tr title='Double click to slect the data.' class='route-row' data-url='".$value->uri()."' data-name='".$route_name."' >";
                     echo "<td>".$i."</td>";
-                    // echo "<td>".implode('|', $value->methods())."</td>";
                     echo "<td>".$value->uri()."</td>";
                     echo "<td>" . $route_name . "</td>";
                 echo "</tr>";

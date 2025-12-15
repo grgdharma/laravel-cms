@@ -1,5 +1,21 @@
-@extends('errors.minimal')
+@extends('layouts.admin.app')
+@section('title','Unauthorized | Permission denied')
+@section('content')
 
-@section('title', __('Forbidden'))
-@section('code', '403')
-@section('message', __($exception->getMessage() ?: 'Forbidden'))
+@include('admin.includes.sidebar')
+<div class="page-wrapper">
+    @include('admin.includes.topbar')
+    <div class="page-content">
+		<div class="card">
+			<div class="card-header">403 | Unauthorized </div>
+			<div class="card-body">
+				<div>
+					<strong>Route URL: </strong>{{Route::getFacadeRoot()->current()->uri()}}
+					<br><br>
+				</div>
+        		<div class="title">Sorry, Permission denied, the page you are looking for. </div>
+        	</div>
+		</div>
+    </div>
+</div>
+@endsection

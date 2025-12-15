@@ -13,8 +13,9 @@
             </div>
             <div class="card-body">
                 
-                <form autocomplete="off" method="post" action="{{route('system.page.update',$id)}}">
+                <form autocomplete="off" method="post" action="{{route('system.page.update',$page->id)}}">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-9">
                             <div class="row">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-default"><i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('Update') }}</button>
+                    <button type="submit" class="btn btn-default"><i class="fa fa-sign-in" aria-hidden="true"></i> Update </button>
                 </form>
      
             </div>

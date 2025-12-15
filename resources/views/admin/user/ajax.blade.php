@@ -6,6 +6,7 @@
     <div class="modal-body">
         <form autocomplete="off" method="POST" action="{{route('system.administration.update',$id)}}">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $edit->name }}" placeholder="Name" required>
             </div>
@@ -29,7 +30,7 @@
                 </div>
             </div>
             
-            <button type="submit" class="btn btn-default">{{ __('Update') }}</button>
+            <button type="submit" class="btn btn-default"> Update</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         
         </form>
