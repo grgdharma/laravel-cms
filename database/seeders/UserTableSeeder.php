@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
             [
                 'name' => 'Dharma Gurung',
                 'email' => 'gurungdrg30@gmail.com',
-                'mobile' => '9843690989',
+                'mobile' => '9843600000',
                 'password' => bcrypt('password123'),
                 'email_verified_at' => date('Y-m-d g:i:s'),
                 'verification_code' => $verification_code

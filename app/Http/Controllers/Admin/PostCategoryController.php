@@ -7,34 +7,28 @@ use Illuminate\Http\Request;
 
 class PostCategoryController extends Controller
 {
-    /**
-     * Request form data
-     * 
-     * @var array
-     */
-    private function form_data($request){
-
-        $title          = $request->input('title');
-        $description    = $request->input('description');
-        $meta_description = $request->input('meta_description');
-        $meta_keywords  = $request->input('meta_keywords');
-        $image          = $request->input('feature_image');
-        $thumbnail      = $request->input('thumbnail');
-        $status         = $request->input('status');
-        $sort_order     = $request->input('sort_order') !=''?$request->input('sort_order'):0;
-
-        $data = array(
-            'title'          => $title,
-            'description'    => $description,
-            'meta_description'=> $meta_description,
-            'meta_keywords'  => $meta_keywords,
-            'thumbnail'     => $thumbnail,
-            'image'         => $image,
-            'status'        => $status,
-            'sort_order'    => $sort_order
-        );  
-        return $data;
+    public function __construct()
+    {
+        // Add authorization middleware if needed
+        $this->middleware('check.permission');
     }
+    /**
+     * Prepare form data with defaults.
+     */
+    private function prepareFormData(Request $request)
+    {
+        return [
+            'title'            => $request->input('title'),
+            'description'      => $request->input('description'),
+            'meta_description' => $request->input('meta_description'),
+            'meta_keywords'    => $request->input('meta_keywords'),
+            'thumbnail'        => $request->input('thumbnail'),
+            'image'            => $request->input('feature_image'),
+            'status'           => (bool) $request->input('status'),
+            'sort_order'       => (int) $request->input('sort_order', 0),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,12 +36,10 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
-        if(checkAuthorization() == true){
-            $data['category'] = PostCategory::get();
-            return view('admin.category.all',$data);
-        }else{
-            return view('errors.401');
-        }
+        $categories = PostCategory::get();
+        return view('admin.category.all', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -57,11 +49,7 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
-        if(checkAuthorization() == true){
-            return view('admin.category.create');
-        }else{
-            return view('errors.401');
-        }
+        return view('admin.category.create');
     }
 
     /**
@@ -75,10 +63,10 @@ class PostCategoryController extends Controller
         $request->validate([
             'title' => 'required|max:255'
         ]);
-        $form_data = $this->form_data($request);
-        $result = PostCategory::create($form_data);
+        $data = $this->prepareFormData($request);
+        $result = PostCategory::create($data);
         if ($result) {
-            return back()->with('success','Success, added a new category.');   
+            return back()->with('success','Your item has been created.');   
         }else{
             return back()->with('error','Sorry, something is wrong');   
         }
@@ -91,17 +79,10 @@ class PostCategoryController extends Controller
      */
     public function edit($id)
     {
-        if(checkAuthorization() == true){
-            $category = PostCategory::where('id',$id)->first();
-            if(isset($category)){
-                $data['edit'] = $category;
-                return view('admin.category.edit',$data);
-            }else{
-                return redirect()->route('system.post.category')->with('error','Sorry, data not found.');   
-            }
-        }else{
-            return view('errors.401');
-        }
+        $category = PostCategory::findOrFail($id);
+        return view('admin.category.edit', [
+            'edit' => $category,
+        ]);
     }
 
     /**
@@ -116,12 +97,12 @@ class PostCategoryController extends Controller
         $request->validate([
             'title' => 'required|max:255',
         ]);
-        $form_data = $this->form_data($request);
-        $result = PostCategory::where('id',$id)->update($form_data);
+        $data = $this->prepareFormData($request);
+        $result = PostCategory::where('id',$id)->update($data);
         if ($result) {
-            return back()->with('success','Success, updated a category.');   
+            return back()->with('success','Your item has been updated.');   
         }else{
-            return back()->with('error','Sorry, something is wrong');   
+            return back()->with('error','Something went wrong. Please try again.');   
         }
     }
 
@@ -135,9 +116,9 @@ class PostCategoryController extends Controller
     {
         $result =  PostCategory::find($id)->delete();
         if ($result) {
-            return back()->with('success','Success, deleted a category.');   
+            return back()->with('success','Your item has been deleted.');   
         }else{
-            return back()->with('error','Sorry, something is wrong');   
+            return back()->with('error','Something went wrong. Please try again.');   
         }
     }
 }

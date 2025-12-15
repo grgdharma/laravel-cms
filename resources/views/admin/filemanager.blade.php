@@ -11,8 +11,8 @@
 	    		</div>
 	    		<div class="col-sm-6">
 			      	<button type="button" class="btn btn-default btn-close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-			      	<button type="button" data-toggle="tooltip" title="" id="button-delete" class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</button>
-			      	<button type="button" data-directory="{{$parent}}" data-target-id="{{$target_id}}" data-toggle="tooltip" title="" id="button-upload" class="btn btn-warning"><i class="fa fa-upload"></i> Upload</button>
+			      	<button type="button" data-toggle="tooltip" title="" id="button-delete" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+			      	<button type="button" data-directory="{{$parent}}" data-target-id="{{$target_id}}" data-toggle="tooltip" title="" id="button-upload" class="btn btn-warning"><i class="fa fa-upload"></i></button>
 				    @if($parent =='' && getStorageDisk()!=='s3')
 				    <button type="button" data-toggle="tooltip" id="button-folder" class="btn btn-default"><i class="fa fa-folder"></i></button>
 				    @endif

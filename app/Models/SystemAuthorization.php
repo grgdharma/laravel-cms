@@ -15,4 +15,11 @@ class SystemAuthorization extends Model
      * @var array
      */
     protected $fillable = ['parent_id','name', 'route_url','icon','role_id','status','sort_order','route_name'];
+    
+    public function children(){
+        return $this->hasMany(self::class, 'parent_id')
+            ->where('status', 1)
+            ->orderBy('sort_order');
+    }
+
 }

@@ -138,8 +138,13 @@
                     </table>
                 </div>
             </div>
-            <div class="pagination">
-                {{ $pagination->links() }}
+            <div class="custom-pagination">
+                <small class="text-muted">
+                    Showing {{ $pagination->firstItem() }}–{{ $pagination->lastItem() }} of {{ $pagination->total() }}
+                </small>
+                <div class="pagination">
+                    {{ $pagination->links() }}
+                </div>
             </div>
    		</div>
        

@@ -5,9 +5,16 @@ use App\Models\AdminRole;
 use App\Http\Controllers\Controller;
 use App\Models\SystemAuthorization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SystemAuthorizationController extends Controller
 {
+    public function __construct()
+    {
+        // Add authorization middleware if needed
+        $this->middleware('check.permission');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,59 +22,51 @@ class SystemAuthorizationController extends Controller
      */
     public function index()
     {
-        if(checkAuthorization() == true){
-            $data_collection['role'] = AdminRole::where('id','!=',1)->get();
-            $result = SystemAuthorization::whereNull('parent_id')->orderby('sort_order','ASC')->simplePaginate(3);
-            $data = [];
-            foreach ($result as $value) {
-                $child_data = [];
-                $child_list = SystemAuthorization::where('parent_id',$value['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
-                if(count($child_list) > 0){
-                    foreach($child_list as $child){
-                        $child_child_data = [];
-                        $child_child_list = SystemAuthorization::where('parent_id',$child['id'])->where('status',1)->orderBy('sort_order', 'ASC')->get()->toArray();
-                        if(count($child_child_list) > 0){
-                            foreach($child_child_list as $child_list){
-                                $child_child_data[] = [
-                                    'id'          => $child_list['id'],
-                                    'icon'        => $child_list['icon'],
-                                    'name'        => $child_list['name'],
-                                    'route_url'   => $child_list['route_url'],
-                                    'role_id'     => json_decode($child_list['role_id']),
-                                    'status'      => $child_list['status'],
-                                    'sort_order'  => $child_list['sort_order'],
-                                ];
-                            }
-                        }
-                        $child_data[] = [
-                            'id'          => $child['id'],
-                            'icon'        => $child['icon'],
-                            'name'        => $child['name'],
-                            'route_url'   => $child['route_url'],
-                            'role_id'     => json_decode($child['role_id']),
-                            'status'      => $child['status'],
-                            'sort_order'  => $child['sort_order'],
-                            'child_child_list'=> $child_child_data,
-                        ];
-                    }
-                }
-                $data[] = array(
-                    'id'          => $value['id'],
-                    'icon'        => $value['icon'],
-                    'name'        => $value['name'],
-                    'route_url'   => $value['route_url'],
-                    'role_id'     => json_decode($value['role_id']),
-                    'status'      => $value['status'],
-                    'sort_order'  => $value['sort_order'],
-                    'child_list'=> $child_data,
-                );
-            }
-            $data_collection['permission'] = $data;
-            $data_collection['pagination'] = $result;
-            return view('admin.authorization.all',$data_collection);
-        }else{
-            return view('errors.401');
-        }
+        $data_collection['role'] = AdminRole::where('id', '!=', 1)->get();
+
+        $perPage = 3;
+        $page    = request()->get('page', 1);
+        $result =  SystemAuthorization::with('children.children')
+            ->whereNull('parent_id')
+            ->orderBy('sort_order')
+            ->paginate($perPage);
+        $data_collection['permission'] = $result->map(function ($parent) {
+            return [
+                'id'         => $parent->id,
+                'icon'       => $parent->icon,
+                'name'       => $parent->name,
+                'route_url'  => $parent->route_url,
+                'role_id'    => json_decode($parent->role_id),
+                'status'     => $parent->status,
+                'sort_order' => $parent->sort_order,
+                'child_list' => $parent->children->map(function ($child) {
+                    return [
+                        'id'         => $child->id,
+                        'icon'       => $child->icon,
+                        'name'       => $child->name,
+                        'route_url'  => $child->route_url,
+                        'role_id'    => json_decode($child->role_id),
+                        'status'     => $child->status,
+                        'sort_order' => $child->sort_order,
+                        'child_child_list' => $child->children->map(function ($sub) {
+                            return [
+                                'id'         => $sub->id,
+                                'icon'       => $sub->icon,
+                                'name'       => $sub->name,
+                                'route_url'  => $sub->route_url,
+                                'role_id'    => json_decode($sub->role_id),
+                                'status'     => $sub->status,
+                                'sort_order' => $sub->sort_order,
+                            ];
+                        }),
+                    ];
+                }),
+            ];
+        });
+
+        $data_collection['pagination'] = $result;
+
+        return view('admin.authorization.all', $data_collection);
     }
 
     /**
@@ -111,15 +110,24 @@ class SystemAuthorizationController extends Controller
      */
     public function edit(Request $request)
     {
-        $id         = $request->input('model_id');
-        $edit_data  = SystemAuthorization::where('id',$id)->first();
-        if(isset($edit_data)){
-            $data['role']   = AdminRole::where('id','!=',1)->get();
-            $data['edit']   = $edit_data;
-            $data['id']     = $id;
-            return view('admin.authorization.edit',$data);
-        }else{
-            return view('errors.401');
+        try {
+            $id = $request->input('model_id');
+            $edit = SystemAuthorization::findOrFail($id);
+            return view('admin.authorization.edit', [
+                'role' => AdminRole::where('id', '!=', 1)->get(),
+                'edit' => $edit,
+                'id'   => $edit->id,
+            ]);
+        } catch (ModelNotFoundException $e) {
+            // Record not found
+            return abort(404, 'Authorization not found');
+        } catch (\Throwable $e) {
+            // Any other error
+            \Log::error('Authorization edit failed', [
+                'error' => $e->getMessage(),
+                'id'    => $request->input('model_id'),
+            ]);
+            return abort(500, 'Something went wrong');
         }
     }
 

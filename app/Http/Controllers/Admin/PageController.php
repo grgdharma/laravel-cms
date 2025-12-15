@@ -10,144 +10,94 @@ use App\Http\Requests\Page\UpdatePageRequest;
 
 class PageController extends Controller
 {
-    /**
-     * Request form data
-     */
-    private function form_data($request){
-        $title = $request->input('title');
-        $parent_id = $request->input('parent_id');
-        $description = $request->input('description');
-        $meta_description = $request->input('meta_description');
-        $meta_keyword = $request->input('meta_keywords');
-        $image = $request->input('feature_image');
-        $template = $request->input('template')?$request->input('template'):'default';
-        $sort_order = $request->input('sort_order') !=''?$request->input('sort_order'):0;
-        $status = $request->input('status') !=''?$request->input('status'):0;
-        $data = array(
-            'parent_id'         => $parent_id !="" ? $parent_id : NULL,
-            'title'             => $title,
-            'description'       => $description,
-            'meta_description'  => $meta_description,
-            'meta_keywords'     => $meta_keyword,
-            'image'             => $image,
-            'template'          => $template,
-            'sort_order'        => $sort_order,
-            'status'            => $status
-        );  
-        return $data;
+    public function __construct()
+    {
+        // Add authorization middleware if needed
+        $this->middleware('check.permission');
     }
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Prepare form data with defaults.
+     */
+    private function prepareFormData(Request $request)
+    {
+        return [
+            'parent_id'        => $request->input('parent_id') ?: null,
+            'title'            => $request->input('title'),
+            'description'      => $request->input('description'),
+            'meta_description' => $request->input('meta_description'),
+            'meta_keywords'    => $request->input('meta_keywords'),
+            'image'            => $request->input('feature_image'),
+            'template'         => $request->input('template') ?: 'default',
+            'sort_order'       => $request->input('sort_order') ?: 0,
+            'status'           => $request->input('status') ?: 0,
+        ];
+    }
+    /**
+     * Display a listing of pages.
      */
     public function index()
     {
-        if(checkAuthorization() == true){
-            $data['pages'] = Pages::get();
-            return view('admin.pages.all',$data);
-        }else{
-            return view('errors.401');
-        }
+        $pages = Pages::all();
+        return view('admin.pages.all', compact('pages'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new page.
      */
     public function create()
     {
-        if(checkAuthorization() == true){
-            $data['page_lists'] = Pages::whereNull('parent_id')->get();
-            return view('admin.pages.create',$data);
-        }else{
-            return view('errors.401');
-        }
+        $page_lists = Pages::whereNull('parent_id')->get();
+        return view('admin.pages.create', compact('page_lists'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Store a newly created page.
      */
     public function store(AddPageRequest $request)
     {
-        $form_data = $this->form_data($request);
-        try{
-            $result = Pages::create($form_data);
-            if($result) {
-                return back()->with('success','Success, you have added a page.');   
-            }else{
-                return back()->with('error','Sorry, something is wrong.');   
-            }
-        }catch(\Exception $e){
-            return redirect()->route('system.page')->with('error',$e->getMessage());   
+        $data = $this->prepareFormData($request);
+        try {
+            Pages::create($data);
+            return back()->with('success','Your item has been created.');
+        } catch (\Exception $e) {
+            return back()->with('error','Something went wrong. Please try again.');
         }
     }
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Show the form for editing a page.
      */
     public function edit($id)
     {
-        if(checkAuthorization() == true){
-            $data['id'] = $id;
-            $page = Pages::where('id',$id)->first();
-            if(isset($page)){
-                $data['page'] = $page;
-                $data['page_lists'] = Pages::whereNull('parent_id')->get();
-                return view('admin.pages.edit',$data);
-            }else{
-                return redirect()->route('system.page')->with('error','Sorry, data not found.');  
-            }
-        }else{
-            return view('errors.401');
+        $page = Pages::findOrFail($id);
+        $page_lists = Pages::whereNull('parent_id')->get();
+        return view('admin.pages.edit', compact('page', 'page_lists'));
+    }
+
+    /**
+     * Update the specified page.
+     */
+    public function update(UpdatePageRequest $request, Pages $page)
+    {
+        $data = $this->prepareFormData($request);
+        try {
+            $page->update($data);
+            return back()->with('success','Your item has been updated.');
+        } catch (\Exception $e) {
+            return back()->with('error','Something went wrong. Please try again.');
         }
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Remove the specified page.
      */
-    public function update(UpdatePageRequest $request, $id)
+    public function destroy(Pages $page)
     {
-        $form_data = $this->form_data($request);
-        try{
-            $result = Pages::where('id',$id)->update($form_data);
-            if ($result) {
-                return back()->with('success','Success, you have modified data.');   
-            }else{
-                return back()->with('error','Sorry, something is wrong');   
-            }
-        }catch(\Exception $e){
-            return redirect()->route('system.page')->with('error',$e->getMessage()); 
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try{
-            $result =  Pages::find($id)->delete();
-            if($result) {
-                return back()->with('success','Success, you have deleted a page.');   
-            }else{
-                return back()->with('error','Sorry, something is wrong.');   
-            }
-        }catch(\Exception $e){
-            return redirect()->route('system.page')->with('error',$e->getMessage()); 
+        try {
+            $page->delete();
+            return back()->with('success','Your item has been deleted.');
+        } catch (\Exception $e) {
+            return back()->with('error','Something went wrong. Please try again.');
         }
     }
 }
