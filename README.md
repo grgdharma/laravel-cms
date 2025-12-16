@@ -58,7 +58,7 @@ Follow the steps below to set up the project on your local environment.
 - php artisan serve
 
 ### 9. Access Admin Panel
-- http://localhost/admin/login
+- http://localhost:8000/admin/login
 - Default Login Credentials
 - Email: gurungdrg30@gmail.com
 - Password: laravel-cms@2022
