@@ -35,7 +35,7 @@ class GeneralController extends Controller
             foreach ($keys as $key => $value) {
                 General::set($key, $value);
             }
-            return back()->with('success','Your item has been updated.');   
+            return back()->with('success','Your general information has been updated.');   
         } catch (\Exception $exception) {
             return back()->withInput()->with('error', $exception->getMessage());
         }

@@ -214,6 +214,36 @@ class SystemAuthorizationTableSeeder extends Seeder
                 'sort_order'=> 0,
                 'icon'      => 'arrow-right'
             ],
+            [
+                'parent_id' => 6,
+                'name'      => 'Update',
+                'route_url' => 'system/administration/{administration}',
+                'route_name'=> 'system.administration.update',
+                'role_id'   => json_encode(["1"]),
+                'status'    => 1,
+                'sort_order'=> 0,
+                'icon'      => 'arrow-right'
+            ],
+            [
+                'parent_id' => 4,
+                'name'      => 'Update',
+                'route_url' => 'system/authorization/{authorization}',
+                'route_name'=> 'system.authorization.update',
+                'role_id'   => json_encode(["1"]),
+                'status'    => 1,
+                'sort_order'=> 0,
+                'icon'      => 'arrow-right'
+            ],
+            [
+                'parent_id' => 7,
+                'name'      => 'Update',
+                'route_url' => 'system/user/{user}',
+                'route_name'=> 'user.update',
+                'role_id'   => json_encode(["1"]),
+                'status'    => 1,
+                'sort_order'=> 0,
+                'icon'      => 'arrow-right'
+            ],
 
         ];
 

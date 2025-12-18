@@ -119,16 +119,18 @@
         }
     }
     $('#editModal').on('show.bs.modal', function(e) {
-        var token = "{{csrf_token()}}";
-        var path = "{{route('system.administration.edit')}}";
-        var $modal = $(this);
+        var token = "{{ csrf_token() }}";
+        var path = "{{ route('system.administration.edit') }}";
         var model_id = e.relatedTarget.id;
+        var $modal = $(this);
         $.ajax({
-            cache: false,
-            type: 'post',
+            type: 'POST',
             url: path,
-            data:{model_id:model_id,_token:token},
-            success: function(data) {
+            data: {
+                model_id: model_id,
+                _token: token
+            },
+            success: function (data) {
                 $modal.find('.modal-dialog').html(data);
             }
         });

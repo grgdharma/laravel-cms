@@ -8,29 +8,30 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
+    public function __construct()
+    {
+        // Add authorization middleware if needed
+        $this->middleware('check.permission');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if(checkAuthorization() == true){
-            $limit = 10;
-            if(isset($_GET['page']) && $_GET['page'] !=1){
-                $data['starting'] = ($limit *$_GET['page'])-$limit+1;
-                $data['page'] = ($limit * $_GET['page']) - $limit + 1;
-            }else{
-                $data['starting'] = 1;
-                $data['page'] = 1;
-            }
-            $data['total'] = User::count();
-            $data['customer'] = User::orderBy('name','ASC')->paginate($limit);
-            return view('admin.customer.all',$data);
-        }else{
-            return view('errors.401');
-        }
+        $limit = 10;
+        $customers = User::orderBy('name', 'ASC')->paginate($limit);
+        $starting = ($customers->currentPage() - 1) * $limit + 1;
+        return view('admin.customer.all', [
+            'customer' => $customers,
+            'total'    => $customers->total(),
+            'starting' => $starting,
+            'page'     => $starting,
+        ]);
     }
+
     /**
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
@@ -40,9 +41,9 @@ class UserController extends Controller
         try{
             $result = User::find($id)->delete();
             if ($result) {
-                return back()->with('success','Successfully deleted data.');   
+                return back()->with('success','Your user has been deleted.');   
             }else{
-                return back()->with('error','Sorry, something is wrong.');   
+                return back()->with('error','Something went wrong. Please try again.');   
             }
         }catch(\Exception $e){
             return back()->with('error',$e->getMessage());   
