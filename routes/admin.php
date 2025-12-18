@@ -74,18 +74,27 @@ Route::group(['prefix' => 'system', 'middleware' => ['auth:admin']], function ()
     Route::post('/filemanager/folder/create', [FileManagerController::class, 'create_folder'])->name('create.folder');
     Route::post('/filemanager/delete', [FileManagerController::class, 'delete'])->name('delete.file.folder');
 
+    // Authorization
+    Route::resource('authorization', SystemAuthorizationController::class)->names([
+        'index'   => 'system.authorization',
+        'store'   => 'system.authorization.store',
+        'update'  => 'system.authorization.update',
+        'destroy' => 'system.authorization.delete',
+    ])->except(['create', 'show', 'edit']);
+    Route::post('authorization/edit',[SystemAuthorizationController::class, 'edit'])->name('system.authorization.edit');
+    Route::post('authorization/update-role',[SystemAuthorizationController::class, 'role_update'])->name('system.authorization.role.update');
+    
     // Admin Management
     Route::resource('administration', AdminController::class)->names([
         'index'   => 'system.administration',
         'store'   => 'system.administration.store',
         'update'  => 'system.administration.update',
         'destroy' => 'system.administration.delete',
-    ])->except(['show', 'create']);
+    ])->except(['create', 'show', 'edit']);
     Route::post('administration/edit', [AdminController::class, 'edit'])->name('system.administration.edit');
 
-
     // Users
-    Route::resource('user', UserController::class)->only(['index', 'destroy'])->names([
+    Route::resource('user', UserController::class)->names([
         'index'   => 'system.user',
         'destroy' => 'system.user.delete',
     ]);
@@ -100,16 +109,6 @@ Route::group(['prefix' => 'system', 'middleware' => ['auth:admin']], function ()
         'destroy' => 'system.page.delete',
     ])->except(['show']);
 
-    // Authorization
-    Route::resource('authorization', SystemAuthorizationController::class)->names([
-        'index'   => 'system.authorization',
-        'store'   => 'system.authorization.store',
-        'update'  => 'system.authorization.update',
-        'destroy' => 'system.authorization.delete',
-    ])->except(['create', 'show', 'edit']);
-    Route::post('authorization/edit',[SystemAuthorizationController::class, 'edit'])->name('system.authorization.edit');
-    Route::post('authorization/update-role',[SystemAuthorizationController::class, 'role_update'])->name('system.authorization.role.update');
-    
     // Post
     Route::resource('post', PostController::class)->names([
         'index'   => 'system.post',

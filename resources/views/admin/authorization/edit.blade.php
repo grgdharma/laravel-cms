@@ -5,6 +5,7 @@
     <div class="modal-body">
         <form autocomplete="off" method="POST" action="{{route('system.authorization.update',$id)}}">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $edit->name }}" placeholder="Name" required >
             </div>

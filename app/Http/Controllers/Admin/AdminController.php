@@ -13,15 +13,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        // Add authorization middleware if needed
+        $this->middleware('check.permission')->except(['edit']);
+    }
     /**
      * Display a listing of admins.
      */
     public function index()
     {
-        if (!checkAuthorization()) {
-            abort(401);
-        }
-
         $roles = AdminRole::where('id', '!=', 1)->get();
         $authAdmin = Auth::guard('admin')->user();
 
@@ -50,7 +51,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return back()->with('success', 'Your item has been created.');
+        return back()->with('success', 'Your user has been created.');
     }
 
     /**
@@ -85,7 +86,7 @@ class AdminController extends Controller
             $data['password'] = Hash::make($request->new_password);
         }
         $admin->update($data);
-        return back()->with('success', 'Your item has been updated.');
+        return back()->with('success', 'Your user has been updated.');
     }
 
     /**
@@ -96,6 +97,6 @@ class AdminController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->delete();
 
-        return back()->with('success', 'Your item has been deleted.');
+        return back()->with('success', 'Your user has been deleted.');
     }
 }

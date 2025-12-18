@@ -12,7 +12,7 @@ class SystemAuthorizationController extends Controller
     public function __construct()
     {
         // Add authorization middleware if needed
-        $this->middleware('check.permission');
+        $this->middleware('check.permission')->except(['edit','role_update']);
     }
 
     /**
@@ -93,7 +93,7 @@ class SystemAuthorizationController extends Controller
             );
             $result = SystemAuthorization::create($data);
             if ($result) {
-                return back()->with('success','Successfully added data.');   
+                return back()->with('success','Your item has been created.');   
             }else{
                 return back()->with('error','Sorry, something is wrong.');   
             }
@@ -157,7 +157,7 @@ class SystemAuthorizationController extends Controller
             );
             $result = SystemAuthorization::where('id', $id)->update($data);
             if ($result) {
-                return back()->with('success','Successfully updated data.');   
+                return back()->with('success','Your item has been updated.');   
             }else{
                 return back()->with('error','Sorry, something is wrong.');   
             }
@@ -175,7 +175,7 @@ class SystemAuthorizationController extends Controller
         try{
             $result = SystemAuthorization::find($id)->delete();
             if ($result) {
-                return back()->with('success','Successfully deleted data.');   
+                return back()->with('success','Your item has been deleted.');   
             }else{
                 return back()->with('error','Sorry, something is wrong.');   
             }

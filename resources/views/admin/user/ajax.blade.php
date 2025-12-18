@@ -4,7 +4,7 @@
         <h4 class="modal-title">Edit</h4>
     </div>
     <div class="modal-body">
-        <form autocomplete="off" method="POST" action="{{route('system.administration.update',$id)}}">
+        <form autocomplete="off" method="post" action="{{route('system.administration.update',$id)}}">
             @csrf
             @method('PUT')
             <div class="form-group">
