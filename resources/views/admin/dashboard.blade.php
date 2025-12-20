@@ -72,6 +72,9 @@
 
         </div>
     </div>
+    <div class="env-info">
+        PHP {{ PHP_VERSION }} | Laravel {{ app()->version() }}
+    </div>
 </div>
 @endsection
 @section('script')
@@ -80,7 +83,8 @@
             getVisitorInfo('All');
         });
         function getVisitorInfo(type){
-            var url = "{{route('system.visitor.info', '')}}"+"/"+type;
+            var url = "{{ rtrim(route('system.visitor.info', ''), '/') }}";
+            var url = url + "/" + type;
             $.ajax({
                 url: url,
                 method: 'GET',
