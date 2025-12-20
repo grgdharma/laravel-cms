@@ -17,7 +17,7 @@ Admin Dashboard
 
 Ensure your system meets the following versions:
 
-- **Minimum PHP version:** 8.1
+- **Minimum PHP version:** 8.2
 - **Composer:** Latest version  
 - **MySQL:** 5.7+ 
 
