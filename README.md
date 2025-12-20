@@ -5,9 +5,6 @@ This guide provides complete installation steps to run the project locally.
 
 <img width="2710" height="1567" alt="image" src="https://github.com/user-attachments/assets/a3d17b93-409c-42e7-8536-81e3fdd612ac" />
 
-Admin Login
-<img width="2581" height="1542" alt="image" src="https://github.com/user-attachments/assets/6b7d150f-4a42-427c-b3a7-eab48b0fa932" />
-
 Admin Dashboard
 <img width="2439" height="1332" alt="image" src="https://github.com/user-attachments/assets/190b33ab-50cf-4ec6-99dd-ffe2e6461a1b" />
 
